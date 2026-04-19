@@ -137,47 +137,56 @@ Which phases cover which requirements. Populated by the roadmapper agent.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| POL-01 | TBD | Pending |
-| POL-02 | TBD | Pending |
-| POL-03 | TBD | Pending |
-| POL-04 | TBD | Pending |
-| GOV-01 | TBD | Pending |
-| GOV-02 | TBD | Pending |
-| GOV-03 | TBD | Pending |
-| GOV-04 | TBD | Pending |
-| GOV-05 | TBD | Pending |
-| TOK-01 | TBD | Pending |
-| TOK-02 | TBD | Pending |
-| TOK-03 | TBD | Pending |
-| TOK-04 | TBD | Pending |
-| TOK-05 | TBD | Pending |
-| TOK-06 | TBD | Pending |
-| DEP-01 | TBD | Pending |
-| DEP-02 | TBD | Pending |
-| DEP-03 | TBD | Pending |
-| DEP-04 | TBD | Pending |
-| OPS-01 | TBD | Pending |
-| OPS-02 | TBD | Pending |
-| OPS-03 | TBD | Pending |
-| OPS-04 | TBD | Pending |
-| OPS-05 | TBD | Pending |
-| OPS-06 | TBD | Pending |
-| OPS-07 | TBD | Pending |
-| LIQ-01 | TBD | Pending |
-| LIQ-02 | TBD | Pending |
-| LIQ-03 | TBD | Pending |
-| VER-01 | TBD | Pending |
-| VER-02 | TBD | Pending |
-| VER-03 | TBD | Pending |
-| VER-04 | TBD | Pending |
-| CEX-01 | TBD | Pending |
-| CEX-02 | TBD | Pending |
+| POL-01 | Phase 1 | Pending |
+| POL-02 | Phase 1 | Pending |
+| POL-03 | Phase 1 | Pending |
+| POL-04 | Phase 1 | Pending |
+| GOV-01 | Phase 2 | Pending |
+| GOV-02 | Phase 2 | Pending |
+| GOV-03 | Phase 2 | Pending |
+| GOV-04 | Phase 2 | Pending |
+| GOV-05 | Phase 5 | Pending |
+| TOK-01 | Phase 4 | Pending |
+| TOK-02 | Phase 4 | Pending |
+| TOK-03 | Phase 4 | Pending |
+| TOK-04 | Phase 4 | Pending |
+| TOK-05 | Phase 4 | Pending |
+| TOK-06 | Phase 4 | Pending |
+| DEP-01 | Phase 3 | Pending |
+| DEP-02 | Phase 3 | Pending |
+| DEP-03 | Phase 4 | Pending |
+| DEP-04 | Phase 4 | Pending |
+| OPS-01 | Phase 3 | Pending |
+| OPS-02 | Phase 3 | Pending |
+| OPS-03 | Phase 3 | Pending |
+| OPS-04 | Phase 3 | Pending |
+| OPS-05 | Phase 5 | Pending |
+| OPS-06 | Phase 5 | Pending |
+| OPS-07 | Phase 5 | Pending |
+| LIQ-01 | Phase 5 | Pending |
+| LIQ-02 | Phase 5 | Pending |
+| LIQ-03 | Phase 5 | Pending |
+| VER-01 | Phase 5 | Pending |
+| VER-02 | Phase 5 | Pending |
+| VER-03 | Phase 6 | Pending |
+| VER-04 | Phase 6 | Pending |
+| CEX-01 | Phase 7 | Pending |
+| CEX-02 | Phase 7 | Pending |
 
 **Coverage:**
 - v1 requirements: 35 total
-- Mapped to phases: 0 (to be populated by roadmapper)
-- Unmapped: 35
+- Mapped to phases: 35
+- Unmapped: 0
+
+**Phase distribution:**
+- Phase 1 (Foundation): 4 requirements (POL-01..04)
+- Phase 2 (Squads Setup): 4 requirements (GOV-01..04)
+- Phase 3 (Devnet Rehearsal): 6 requirements (DEP-01, DEP-02, OPS-01..04)
+- Phase 4 (Mainnet Ceremony): 8 requirements (TOK-01..06, DEP-03, DEP-04)
+- Phase 5 (DEX + Early Verification + Ops): 9 requirements (LIQ-01..03, VER-01, VER-02, GOV-05, OPS-05..07)
+- Phase 6 (Broader Listings): 2 requirements (VER-03, VER-04)
+- Phase 7 (CEX Prep): 2 requirements (CEX-01, CEX-02)
 
 ---
 *Requirements defined: 2026-04-19*
-*Last updated: 2026-04-19 after initial definition*
+*Last updated: 2026-04-19 after roadmap creation (traceability populated, 35/35 mapped)*
