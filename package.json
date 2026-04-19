@@ -1,0 +1,42 @@
+{
+  "name": "cayc-solana-contract",
+  "version": "0.0.0",
+  "private": true,
+  "description": "CAYC — branded payments token, USDC-referenced (Solana Token-2022 with Squads v4 multisig governance). NOT a stablecoin.",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20.18.0 <23",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write \"**/*.{ts,js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,js,json,md}\"",
+    "gitleaks": "gitleaks detect --config .gitleaks.toml --redact --verbose",
+    "gitleaks:staged": "gitleaks protect --staged --config .gitleaks.toml --redact --verbose",
+    "lang:audit": "echo 'lang:audit wired up in Plan 04'",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@solana/spl-token": "^0.4.14",
+    "@solana/spl-token-metadata": "^0.1.6",
+    "@solana/web3.js": "^1.98.4",
+    "@sqds/multisig": "^2.1.4",
+    "bs58": "^6.0.0",
+    "commander": "^14.0.3",
+    "dotenv": "^17.4.2",
+    "helius-sdk": "^2.2.2",
+    "pino": "^10.3.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.3.3",
+    "solana-bankrun": "^0.4.0",
+    "tsx": "^4.21.0",
+    "typescript": "~5.6.0",
+    "vitest": "^4.1.4"
+  }
+}

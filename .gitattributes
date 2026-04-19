@@ -1,2 +1,9 @@
 # Auto detect text files and perform LF normalization
-* text=auto
+* text=auto eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.ts text eol=lf
+*.js text eol=lf
+*.sh text eol=lf
+*.keypair.json -diff -merge
+*.keypair.json filter=secret

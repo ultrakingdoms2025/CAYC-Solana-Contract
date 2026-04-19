@@ -1,0 +1,6 @@
+node_modules
+artifacts
+.planning/research
+pnpm-lock.yaml
+*.min.js
+*.min.css
