@@ -92,9 +92,9 @@ The public contact addresses above become active no later than the first public 
 
 ## 11. Version history
 
-| Version | Date | Summary of changes | Changed by |
-|---|---|---|---|
-| 1.0 | 2026-04-19 | Initial draft — Phase 1 POL-02 deliverable. Published source of truth; scheduled for publication on caycsolana.com during Phase 5 Ops Go-Live. | Project maintainer (pre-launch) |
+| Version | Date       | Summary of changes                                                                                                                             | Changed by                      |
+| ------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| 1.0     | 2026-04-19 | Initial draft — Phase 1 POL-02 deliverable. Published source of truth; scheduled for publication on caycsolana.com during Phase 5 Ops Go-Live. | Project maintainer (pre-launch) |
 
 Any change to this policy (including typo fixes) bumps the patch version (1.0.x) for editorial changes or the minor version (1.x) for substantive changes. Major version bumps (2.0) are reserved for changes that broaden signer discretion (e.g., shortening the 48-hour window) and MUST themselves be announced at least 14 days in advance via the same canonical channels in Section 6.
 
@@ -103,4 +103,5 @@ Any change to this policy (including typo fixes) bumps the patch version (1.0.x)
 CAYC is not a "payment stablecoin" under the US GENIUS Act of 2025, because (a) CAYC is not backed by any fiat reserve, (b) CAYC holders have no redemption right against an issuer, and (c) CAYC is not issued by a Permitted Payment Stablecoin Issuer. Similarly, CAYC does not fall within the MiCA "e-money token" or "asset-referenced token" definitions for the same reasons. The use of the USDC decimal convention and of the phrase "USDC-referenced" is purely a product-design choice for clean payments UX; it does NOT create a redemption obligation, a reserve commitment, or a regulated-stablecoin classification. This policy is not legal advice to holders; holders should consult their own counsel regarding the tax, securities, and regulatory status of CAYC in their jurisdiction.
 
 ---
-*This is a draft document. It becomes binding upon publication to `caycsolana.com` during Phase 5 Ops Go-Live. The draft is archived in the CAYC repository under `docs/policies/mint-policy.md` with the effective date updated at publication time.*
+
+_This is a draft document. It becomes binding upon publication to `caycsolana.com` during Phase 5 Ops Go-Live. The draft is archived in the CAYC repository under `docs/policies/mint-policy.md` with the effective date updated at publication time._
