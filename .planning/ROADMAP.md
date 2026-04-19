@@ -149,7 +149,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation — Policy, Legal, Dev Environment | 2/4 | In Progress | - |
+| 1. Foundation — Policy, Legal, Dev Environment | 3/4 | In Progress | - |
 | 2. Squads Multisig Setup (Devnet + Mainnet) | 0/TBD | Not started | - |
 | 3. Devnet Full Rehearsal | 0/TBD | Not started | - |
 | 4. Mainnet Launch Ceremony | 0/TBD | Not started | - |
