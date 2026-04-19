@@ -76,7 +76,7 @@ requirements-completed: []  # Plan's frontmatter attributed POL-02/03/04 to this
 requirements-enabled: [POL-02, POL-03, POL-04]  # Substrate created: docs/policies/ tracked, package.json has lang:audit placeholder
 
 # Metrics
-duration: 9min
+duration: 16min
 completed: 2026-04-19
 ---
 
@@ -86,9 +86,9 @@ completed: 2026-04-19
 
 ## Performance
 
-- **Duration:** 9 min (8m 35s task execution + 30s summary)
+- **Duration:** 16 min (including tooling install, smoke test, and state/roadmap updates)
 - **Started:** 2026-04-19T20:29:36Z
-- **Completed:** 2026-04-19T20:38:23Z
+- **Completed:** 2026-04-19T20:45:42Z
 - **Tasks:** 3 / 3
 - **Files created:** 21 (manifests, config, .gitkeeps, env examples, gitleaks config, hook, placeholder)
 - **Files modified:** 1 (.gitattributes)
