@@ -12,8 +12,8 @@ Requirements for initial launch. Each maps to one roadmap phase.
 Pre-launch policy artifacts that establish trust and unblock verification.
 
 - [x] **POL-01**: Verify "CAYC" symbol availability across Jupiter, Solscan, CoinGecko, and CoinMarketCap before metadata is finalized
-- [ ] **POL-02**: Publish a Mint Policy document (scope, justification, 48-hour pre-announcement / time-lock commitment for any future mint)
-- [ ] **POL-03**: Publish a Clawback / Freeze Authority Policy (narrow scope: lawful orders + documented theft / scam recovery via multisig vote)
+- [x] **POL-02**: Publish a Mint Policy document (scope, justification, 48-hour pre-announcement / time-lock commitment for any future mint)
+- [x] **POL-03**: Publish a Clawback / Freeze Authority Policy (narrow scope: lawful orders + documented theft / scam recovery via multisig vote)
 - [ ] **POL-04**: Audit all public-facing copy (website, listing applications, CEX applications) for the word "stablecoin" and replace with "branded payments token, USDC-referenced"
 
 ### Governance (Squads Multisig)
@@ -138,8 +138,8 @@ Which phases cover which requirements. Populated by the roadmapper agent.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | POL-01 | Phase 1 | Complete |
-| POL-02 | Phase 1 | Pending |
-| POL-03 | Phase 1 | Pending |
+| POL-02 | Phase 1 | Complete |
+| POL-03 | Phase 1 | Complete |
 | POL-04 | Phase 1 | Pending |
 | GOV-01 | Phase 2 | Pending |
 | GOV-02 | Phase 2 | Pending |
