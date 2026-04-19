@@ -31,7 +31,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. The "CAYC" symbol has been checked against Jupiter, Solscan, CoinGecko, and CoinMarketCap; either no conflict exists or a naming decision is documented before metadata is finalized.
   3. No public-facing artifact (website, listing draft, CEX application draft, social bios) uses the word "stablecoin"; every instance has been replaced with "branded payments token, USDC-referenced."
   4. The repo is scaffolded with pinned versions (Agave CLI 3.1.13, @solana/web3.js 1.98.4, @solana/spl-token 0.4.14, @sqds/multisig 2.1.4), gitleaks pre-commit active, `.gitignore` blocks keypairs, and Helius RPC credentials are configured per-network in `.env` (never committed).
-**Plans**: TBD
+**Plans**: 4 plans
+- [ ] 01-01-PLAN.md — Symbol availability check across Jupiter, Solscan, CoinGecko, CoinMarketCap (POL-01)
+- [ ] 01-02-PLAN.md — Repo scaffold: pinned package.json, .gitignore, gitleaks pre-commit, per-network .env examples, directory structure (POL-02 + POL-03 + POL-04 substrate)
+- [ ] 01-03-PLAN.md — Draft Mint Policy + Clawback/Freeze Authority Policy v1.0 (POL-02, POL-03)
+- [ ] 01-04-PLAN.md — Language & Disclosure Style Guide + CI language-audit check (POL-04)
 
 **Canonical refs (required reading for downstream agents):**
 - `.planning/PROJECT.md` — Constraints section + Key Decisions table
@@ -145,7 +149,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation — Policy, Legal, Dev Environment | 0/TBD | Not started | - |
+| 1. Foundation — Policy, Legal, Dev Environment | 0/4 | Not started | - |
 | 2. Squads Multisig Setup (Devnet + Mainnet) | 0/TBD | Not started | - |
 | 3. Devnet Full Rehearsal | 0/TBD | Not started | - |
 | 4. Mainnet Launch Ceremony | 0/TBD | Not started | - |
