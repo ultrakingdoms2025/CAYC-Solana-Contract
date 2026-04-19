@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+
+# CAYC pre-commit hook.
+# 1. Run gitleaks on staged changes (blocks commit if secrets found).
+# 2. Run prettier --check on staged .ts/.md/.json files (non-blocking nudge).
+# 3. Run tsc --noEmit (blocks commit if TypeScript fails to compile).
+
+set -e
+
+# --- Step 1: gitleaks (BLOCKING) ---
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "ERROR: gitleaks not installed. Install per README (brew install gitleaks / scoop install gitleaks) and retry."
+  echo "       Commit aborted — do not bypass without explicit authorization."
+  exit 1
+fi
+
+echo "[pre-commit] Running gitleaks on staged changes..."
+gitleaks protect --staged --config .gitleaks.toml --redact --verbose || {
+  echo ""
+  echo "ERROR: gitleaks detected potential secrets in staged changes."
+  echo "       Review the findings above. Do NOT bypass with --no-verify."
+  echo "       If this is a false positive, update the allowlist in .gitleaks.toml."
+  exit 1
+}
+
+# --- Step 2: prettier check (non-blocking on unformatted MD, blocking on .ts/.json) ---
+STAGED_TS_JSON=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|json)$' || true)
+if [ -n "$STAGED_TS_JSON" ]; then
+  echo "[pre-commit] Checking formatting on staged .ts/.json files..."
+  echo "$STAGED_TS_JSON" | xargs -r npx prettier --check || {
+    echo "ERROR: Formatting check failed. Run 'pnpm format' and re-stage."
+    exit 1
+  }
+fi
+
+# --- Step 3: typecheck (BLOCKING; skipped if no .ts changes staged, as tsc on empty tree is wasted work) ---
+STAGED_TS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.ts$' || true)
+if [ -n "$STAGED_TS" ]; then
+  echo "[pre-commit] Running tsc --noEmit..."
+  pnpm typecheck || {
+    echo "ERROR: TypeScript failed to compile. Fix errors before committing."
+    exit 1
+  }
+fi
+
+echo "[pre-commit] OK"

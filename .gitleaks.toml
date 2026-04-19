@@ -1,0 +1,57 @@
+# Gitleaks config for CAYC repo.
+# Extends gitleaks' built-in defaults and adds Solana-specific detections.
+
+title = "CAYC gitleaks config"
+
+[extend]
+useDefault = true
+
+# -- Solana keypair JSON files (array-of-64-uint8, the format `solana-keygen` writes) --
+[[rules]]
+id = "solana-keypair-array"
+description = "Solana keypair exported as a JSON array of 64 bytes"
+# Matches e.g. [123,45,67,89,... (64 numbers)]
+regex = '''\[\s*(?:[0-9]{1,3}\s*,\s*){63}[0-9]{1,3}\s*\]'''
+tags = ["solana", "keypair", "secret"]
+
+  [rules.allowlist]
+  description = "Example/template files are permitted"
+  paths = [
+    '''\.env\.example$''',
+    '''\.env\..+\.example$''',
+  ]
+
+# -- Solana keypair mnemonic hint (24-word BIP39 in a file) --
+[[rules]]
+id = "solana-mnemonic-24-word"
+description = "BIP39 24-word mnemonic phrase (heuristic)"
+regex = '''(?i)\b((?:[a-z]{3,10}\s+){23}[a-z]{3,10})\b'''
+tags = ["solana", "mnemonic", "secret"]
+
+# -- Helius RPC URLs with real API keys (our format specifically) --
+[[rules]]
+id = "helius-rpc-api-key"
+description = "Helius RPC URL with embedded api-key"
+regex = '''https://(?:devnet|mainnet)\.helius-rpc\.com/\?api-key=[0-9a-f]{8,}'''
+tags = ["helius", "rpc", "secret"]
+
+  [rules.allowlist]
+  description = "Placeholder in env examples is OK"
+  regexes = [
+    '''REPLACE_WITH_(DEVNET|MAINNET)_KEY''',
+  ]
+
+# -- Allowlist our own example files + planning docs --
+# Planning markdown (research, phase plans, summaries) may contain example
+# strings, fake keypair arrays, or placeholder API-key patterns for pedagogical
+# purposes. These are explicitly marked REPLACE_WITH_* placeholders or fixtures
+# inside code blocks. Source files and real .env files are NOT allowlisted.
+[allowlist]
+description = "Allowlisted paths — planning docs and example envs"
+paths = [
+  '''\.planning/.+\.md$''',
+  '''\.env\.example$''',
+  '''\.env\..+\.example$''',
+  '''README\.md$''',
+  '''docs/.+\.md$''',
+]

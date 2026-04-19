@@ -1,0 +1,64 @@
+# Node / pnpm
+node_modules/
+.pnpm-store/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# TypeScript / build
+dist/
+build/
+*.tsbuildinfo
+.cache/
+
+# Vitest / test output
+coverage/
+.vitest-cache/
+
+# Environment variables — NEVER commit any .env variant
+.env
+.env.*
+!.env.example
+!.env.devnet.example
+!.env.mainnet.example
+
+# Solana keypairs — NEVER commit any JSON keypair under any common name
+*.keypair.json
+*.keypair
+id.json
+id-*.json
+keys/
+wallets/
+deployer*.json
+signer*.json
+treasury*.json
+authority*.json
+vault*.json
+
+# Anchor / Cargo (if added later)
+target/
+Cargo.lock
+.anchor/
+
+# Ceremony artifacts that MAY contain sensitive data
+# Committed artifacts go in artifacts/ at top level;
+# per-session transcripts may contain tx details and stay local unless scrubbed.
+artifacts/local/
+artifacts/scratch/
+artifacts/*.local.json
+
+# IDE / OS
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# gitleaks baseline (don't commit scan results)
+gitleaks-report.json
