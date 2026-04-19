@@ -2,11 +2,11 @@
 
 ## What This Is
 
-CAYC is a Solana Token-2022 stablecoin designed to serve as the payments / e-commerce rail for an upcoming Cyber Ape Yacht Club project. It is soft-pegged to USDC (branding and market-liquidity targeted, not collateralized), governed by a Squads multisig, and aimed at verified listings across major Solana wallets, block explorers, DEXes, and at least one CEX.
+CAYC is a Solana Token-2022 **branded payments token, USDC-referenced** (deliberately NOT called a "stablecoin" in public copy — see Constraints for legal rationale). It is designed to serve as the payments / e-commerce rail for an upcoming Cyber Ape Yacht Club project, governed by a Squads multisig, and aimed at verified listings across major Solana wallets, block explorers, DEXes, and at least one CEX.
 
 ## Core Value
 
-Users can send and receive CAYC as a trusted USDC-branded payment token on Solana, backed by transparent multisig governance and verified across the wallets, explorers, and exchanges people already use.
+Users can send and receive CAYC as a trusted USDC-referenced payment token on Solana, backed by transparent multisig governance, published operational policies, and verification across the wallets, explorers, and exchanges people already use.
 
 ## Requirements
 
@@ -26,7 +26,10 @@ Users can send and receive CAYC as a trusted USDC-branded payment token on Solan
 - [ ] Token-2022 Metadata extension enabled with CAYC name, symbol, description, logo URI, website URL
 - [ ] Token-2022 Permanent Delegate extension enabled at mint creation (centralized recovery)
 - [ ] Freeze authority retained (not revoked) for compliance scenarios
-- [ ] Mint additional tokens beyond the initial 500M via multisig (uncapped — no hard cap enforced)
+- [ ] Mint additional tokens beyond the initial 500M via multisig (uncapped — no hard cap enforced) under a published Mint Policy with 48-hour pre-announcement / time-lock
+- [ ] Publish a Permanent Delegate + Freeze Authority Policy limiting use to (a) lawful orders and (b) documented theft / scam recovery approved by multisig vote
+- [ ] Pre-launch outreach to Jupiter, Phantom, and RugCheck with the published authority policies to reduce auto-scam-flag risk
+- [ ] Verify that "CAYC" symbol is not already claimed on Jupiter, Solscan, CoinGecko, and CoinMarketCap before finalizing metadata
 - [ ] Burn tokens via multisig
 - [ ] Transfer CAYC to arbitrary wallets (standard SPL transfer behavior)
 - [ ] Rotate / transfer mint, freeze, and update authorities to a different signer (change "contract owner")
@@ -36,13 +39,14 @@ Users can send and receive CAYC as a trusted USDC-branded payment token on Solan
 - [ ] Solscan / Solana Explorer listing with logo, metadata, and verified branding
 - [ ] CoinGecko listing accepted
 - [ ] CoinMarketCap listing accepted
-- [ ] DEX liquidity seeded on a major Solana DEX (Raydium / Orca / Meteora — specific venue TBD)
+- [ ] DEX liquidity seeded on Raydium CPMM (CAYC/USDC pair) — chosen for Token-2022 compatibility and Jupiter routing coverage
 - [ ] CEX listing package prepared (legal disclosures, multisig proof, audit trail, mint/supply documentation)
 
 ### Out of Scope
 
 <!-- Explicit boundaries. Includes reasoning to prevent re-adding. -->
 
+- Public use of the word "stablecoin" — explicitly excluded from website copy, CEX applications, CoinGecko/CMC descriptions, and marketing. Rejected due to GENIUS Act (July 2025) criminal-penalty exposure for false stablecoin advertising and MiCA personal-liability rules. Internal / technical docs can reference the USDC peg intent.
 - Collateralized USDC-backed redemption vault — out of scope for v1; the peg is intentional branding only, not on-chain reserves. Could become a future milestone once liquidity/trust is established.
 - Algorithmic / oracle-based peg mechanisms — explicitly rejected; soft peg only.
 - Custom Rust / Anchor program for the mint — standard Token-2022 extensions are sufficient; adding a custom program increases audit cost and launch risk for no v1 benefit.
@@ -94,6 +98,10 @@ Users can send and receive CAYC as a trusted USDC-branded payment token on Solan
 | All 500M to treasury multisig at launch | Simplest, most auditable initial state; downstream distribution decided later | — Pending |
 | Devnet → Mainnet path (skip testnet) | Testnet adds little value for SPL tokens; devnet is the standard validation target | — Pending |
 | Reject Transfer Fee extension | Fee-on-transfer tokens create friction with CEX listings and with payments UX | — Pending |
+| Public framing: "branded payments token, USDC-referenced" (avoid "stablecoin") | GENIUS Act (July 2025) criminal penalties for false stablecoin advertising; MiCA personal liability. Soft peg without reserves cannot meet regulated stablecoin definitions. | — Pending |
+| Uncapped mint + 48h time-lock + published Mint Policy | Reference failure: USR (Apr 2025) lost 86% after unexpected 80M mint. Transparency + pre-announcement replaces trust that a hard cap would provide. | — Pending |
+| Raydium CPMM as launch DEX venue | Token-2022 compatibility (legacy Raydium AMM v4 and Meteora DAMM v1 don't work), best Jupiter routing, CEX-recognizable. | — Pending |
+| Strict Permanent Delegate + Freeze Authority Policy | >40% of Token-2022 PD tokens auto-flagged as scams on RugCheck. Public narrow-scope policy (lawful orders + documented theft recovery only) + proactive Jupiter/Phantom/RugCheck outreach mitigates flagging. | — Pending |
 
 ---
-*Last updated: 2026-04-19 after initialization*
+*Last updated: 2026-04-19 after research and initial decisions*
