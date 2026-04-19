@@ -141,4 +141,14 @@
 
 ## Decision trail
 
-{Task 2 of this plan populates this section with the final decision.}
+- **2026-04-19T20:49:18Z**: Task 1 verdict was **CONFLICT** (Jupiter + Solscan). User selected option `accept-conflict`. Proceeding with "CAYC" symbol as planned, using brand-qualifier disambiguation.
+- **Rationale captured:**
+  - User elected to preserve the original CAYC brand identity (Cyber Ape Yacht Club 8G) as locked in PROJECT.md Key Decisions, and to accept the downstream friction rather than rename.
+  - Jupiter Verify V3 submission will require extra justification and the full project name; the squatter mint `9JqkhuAU5P7Kyg3WxaTcuYT85AahyvXHr1duxakXpump` ("Clawed Ape Yacht Club", pump.fun, Feb 2026, ~$1.65k mcap, 47 holders, organicScoreLabel "low") remains the only exact-symbol collision on Jupiter and (by on-chain inference) Solscan. CoinGecko and CoinMarketCap are clear.
+  - Users searching "CAYC" on Jupiter/Solscan will see both tokens; copycat confusion risk is accepted as an operational concern (low organic score + tiny market cap on the squatter mitigates but does not eliminate it).
+  - Public-facing copy (website, listing applications, CEX docs) will use **"CAYC (Cyber Ape Yacht Club)"** as the disambiguated form in headers and first references, with subsequent mentions as **"CAYC"**. The Clawback / Freeze Authority Policy (Plan 01-03, POL-03) will explicitly acknowledge the copycat risk and commit to active anti-phishing monitoring of the squatter mint as part of Phase 5 OPS-07 work.
+- **Implied downstream actions (recorded for traceability; not executed by this plan):**
+  - Plan 01-03 (policies) and Plan 01-04 (style guide): include the "CAYC (Cyber Ape Yacht Club)" disambiguation convention.
+  - Phase 5 plan for **OPS-07** (copycat monitoring): explicitly add mint `9JqkhuAU5P7Kyg3WxaTcuYT85AahyvXHr1duxakXpump` to the known-squatter watchlist with a documented response procedure.
+  - Phase 4 ceremony preflight checklist: include a final symbol re-check across all 4 platforms ≤72h before mainnet launch in case new squatters have appeared.
+- **Gate status:** POL-01 resolved. Downstream on-chain work (Phase 2 onward) is unblocked with respect to this launch gate. Brand stays **CAYC**; PROJECT.md Key Decisions and ROADMAP Phase 4 TOK-02 remain unchanged.
