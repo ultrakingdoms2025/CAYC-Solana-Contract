@@ -1,6 +1,7 @@
 node_modules
 artifacts
-.planning/research
+# Planning artifacts are maintained by GSD tooling (PROJECT.md, ROADMAP.md, STATE.md, phase plans, summaries, research, config.json). Prettier has no opinion on their markdown prose and its line-wrap reformatting would churn every plan. Exclude the entire .planning tree.
+.planning
 pnpm-lock.yaml
 *.min.js
 *.min.css

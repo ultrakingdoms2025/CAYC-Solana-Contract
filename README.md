@@ -52,18 +52,31 @@ cp .env.mainnet.example .env.mainnet
 
 ## Pinned versions (Phase 1 Success Criterion 4)
 
-| Dependency | Pin | Source |
-|---|---|---|
-| Agave CLI | 3.1.13 | System-level; verify with `solana --version` |
-| `@solana/web3.js` | ^1.98.4 | `package.json` dependencies |
-| `@solana/spl-token` | ^0.4.14 | `package.json` dependencies |
-| `@sqds/multisig` | ^2.1.4 | `package.json` dependencies |
-| Node.js | 20.18.0 | `.nvmrc` + `package.json` engines |
-| pnpm | 10.33.0 | `package.json` packageManager |
-| TypeScript | ~5.6.0 | `package.json` devDependencies (pinned; do NOT adopt TS 6.x — ecosystem lag) |
+| Dependency          | Pin     | Source                                                                       |
+| ------------------- | ------- | ---------------------------------------------------------------------------- |
+| Agave CLI           | 3.1.13  | System-level; verify with `solana --version`                                 |
+| `@solana/web3.js`   | ^1.98.4 | `package.json` dependencies                                                  |
+| `@solana/spl-token` | ^0.4.14 | `package.json` dependencies                                                  |
+| `@sqds/multisig`    | ^2.1.4  | `package.json` dependencies                                                  |
+| Node.js             | 20.18.0 | `.nvmrc` + `package.json` engines                                            |
+| pnpm                | 10.33.0 | `package.json` packageManager                                                |
+| TypeScript          | ~5.6.0  | `package.json` devDependencies (pinned; do NOT adopt TS 6.x — ecosystem lag) |
 
 See `.planning/research/STACK.md` for rationale on each pin.
 
 ## Project status
 
 Phase 1 of 7: Foundation — Policy, Legal, Dev Environment. See `.planning/ROADMAP.md`.
+
+## Scaffold verification (Phase 1 Plan 02)
+
+The following commands must all pass on a fresh clone after `pnpm install`. They are the contract the Phase 1 scaffold establishes:
+
+```bash
+pnpm typecheck           # TypeScript compiles cleanly (no errors, no emit)
+pnpm format:check        # Prettier says formatting is consistent
+pnpm gitleaks            # No secrets in committed tree
+git config core.hooksPath # Returns .husky/_ under Husky v9 (the shim directory sources .husky/pre-commit)
+```
+
+If any of these fails on main, the scaffold has regressed and must be fixed before any on-chain work proceeds.
