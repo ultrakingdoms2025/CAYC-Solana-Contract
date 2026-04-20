@@ -79,7 +79,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 7 plans
 - [x] 03-01-PLAN.md — Logo resize + metadata JSON + src/config/token-config.ts single source of truth
 - [x] 03-02-PLAN.md — scripts/deploy/verify-mint.ts + unit tests (on-chain state vs token-config assertion)
-- [ ] 03-03-PLAN.md — Arweave + GitHub raw metadata hosting for rehearsal JSONs (DEP-01/02 prereq)
+- [x] 03-03-PLAN.md — Metadata hosting via GitHub raw (Branch B, devnet-only); Arweave deferred to Phase 4 mainnet migration
 - [ ] 03-04-PLAN.md — Rehearsal 1 (throwaway metadata) devnet mint via Squads proposal (DEP-01)
 - [ ] 03-05-PLAN.md — Rehearsal 2 (locked launch metadata) + 500M supply in SEPARATE proposal + wallet-render verification (DEP-02)
 - [ ] 03-06-PLAN.md — OPS drill: additional mint (OPS-01), burn (OPS-02), transfer (OPS-03), authority rotation (OPS-04)

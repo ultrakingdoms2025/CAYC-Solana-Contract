@@ -41,3 +41,18 @@ src/config/token-config.ts       (owned by Plan 03-01)
 **Scope boundary:** Not fixing from Plan 03-02 — out-of-scope per executor deviation rules (files not created/modified by this plan). Will surface at any subsequent commit that stages either file; resolution belongs to Plan 03-01's executor (or a follow-up format-sweep chore commit by whichever plan next touches them).
 
 **Impact on Plan 03-02:** None — Plan 03-02's own files (`scripts/deploy/verify-mint.ts`, `scripts/deploy/verify-mint.test.ts`) both pass `prettier --check` individually.
+
+## From Plan 03-03 Task 3 (2026-04-20)
+
+### Prettier warnings on Plan 03-01 files persist
+
+**Observed:** During Plan 03-03 Task 3 final `pnpm format:check`, the same two Plan 03-01 files continue to fail formatting:
+
+```
+scripts/assets/resize-logo.ts    (owned by Plan 03-01)
+src/config/token-config.ts       (owned by Plan 03-01)
+```
+
+**Scope boundary:** Not fixing from Plan 03-03 — unchanged from Plan 03-02's assessment above. Plan 03-03's own modifications (`assets/metadata/rehearsal-{1,2}.json`, `artifacts/metadata-hosting.json`) pass prettier individually.
+
+**Resolution path:** Whichever plan next edits `scripts/assets/resize-logo.ts` or `src/config/token-config.ts` should run `prettier --write` on them as part of its commit, OR a one-off `chore: format-sweep` commit can be filed independently. Neither blocks Phase 3 progress because `.husky/pre-commit` only runs prettier on STAGED files, and Plan 03-03 does not stage those files.
