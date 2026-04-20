@@ -2,7 +2,7 @@
   "name": "Cyber Ape Yacht Club 8G",
   "symbol": "CAYC",
   "description": "Payment token for Cyber Ape Yacht Club. Squads 3-of-5 multisig.",
-  "image": "PLACEHOLDER_REH2_ARWEAVE_URL",
+  "image": "https://raw.githubusercontent.com/ultrakingdoms2025/CAYC-Solana-Contract/main/assets/logo-512.png",
   "external_url": "https://cayc.io",
   "attributes": []
 }

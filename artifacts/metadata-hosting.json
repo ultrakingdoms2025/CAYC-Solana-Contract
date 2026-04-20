@@ -1,0 +1,41 @@
+{
+  "generated_at": "2026-04-20T17:57:19.249Z",
+  "schema_version": 1,
+  "mode": "github-only",
+  "arweave_deferred_reason": "user chose GitHub-only for devnet rehearsal; Phase 4 mainnet will revisit and switch to Arweave",
+  "phase_4_mainnet_migration_required": true,
+  "github_raw_urls": {
+    "rehearsal_1_json": "https://raw.githubusercontent.com/ultrakingdoms2025/CAYC-Solana-Contract/main/assets/metadata/rehearsal-1.json",
+    "rehearsal_2_json": "https://raw.githubusercontent.com/ultrakingdoms2025/CAYC-Solana-Contract/main/assets/metadata/rehearsal-2.json",
+    "logo_512": "https://raw.githubusercontent.com/ultrakingdoms2025/CAYC-Solana-Contract/main/assets/logo-512.png",
+    "logo_1024": "https://raw.githubusercontent.com/ultrakingdoms2025/CAYC-Solana-Contract/main/assets/logo-1024.png"
+  },
+  "rehearsal_1": {
+    "mode": "github-only",
+    "logo_512_arweave_tx": null,
+    "logo_512_arweave_url": null,
+    "logo_1024_arweave_tx": null,
+    "logo_1024_arweave_url": null,
+    "json_arweave_tx": null,
+    "json_arweave_url": null,
+    "github_raw_url": "https://raw.githubusercontent.com/ultrakingdoms2025/CAYC-Solana-Contract/main/assets/metadata/rehearsal-1.json",
+    "github_logo_512_url": "https://raw.githubusercontent.com/ultrakingdoms2025/CAYC-Solana-Contract/main/assets/logo-512.png",
+    "github_logo_1024_url": "https://raw.githubusercontent.com/ultrakingdoms2025/CAYC-Solana-Contract/main/assets/logo-1024.png",
+    "uploaded_via": "github-raw-only",
+    "uploaded_at": "2026-04-20T17:57:19.300Z"
+  },
+  "rehearsal_2": {
+    "mode": "github-only",
+    "logo_512_arweave_tx": null,
+    "logo_512_arweave_url": null,
+    "logo_1024_arweave_tx": null,
+    "logo_1024_arweave_url": null,
+    "json_arweave_tx": null,
+    "json_arweave_url": null,
+    "github_raw_url": "https://raw.githubusercontent.com/ultrakingdoms2025/CAYC-Solana-Contract/main/assets/metadata/rehearsal-2.json",
+    "github_logo_512_url": "https://raw.githubusercontent.com/ultrakingdoms2025/CAYC-Solana-Contract/main/assets/logo-512.png",
+    "github_logo_1024_url": "https://raw.githubusercontent.com/ultrakingdoms2025/CAYC-Solana-Contract/main/assets/logo-1024.png",
+    "uploaded_via": "github-raw-only",
+    "uploaded_at": "2026-04-20T17:57:29.633Z"
+  }
+}
