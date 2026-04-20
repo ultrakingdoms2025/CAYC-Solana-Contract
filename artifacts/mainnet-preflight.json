@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-04-20T05:21:06.876Z",
+  "commit_sha": "d53f5295d276d0c827eb61d1336c1fa5c7e100ac",
+  "overall": "fail",
+  "check_count": 1,
+  "pass_count": 0,
+  "checks": [
+    {
+      "id": "E0",
+      "description": ".env.mainnet exists",
+      "pass": false,
+      "detail": "copy .env.mainnet.example to .env.mainnet and fill values"
+    }
+  ]
+}

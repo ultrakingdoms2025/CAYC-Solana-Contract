@@ -24,6 +24,7 @@
     "squads:create-devnet": "tsx scripts/squads/create-devnet.ts",
     "squads:rotate-devnet": "tsx scripts/squads/rotate-devnet-signer.ts",
     "squads:smoke-mint": "tsx scripts/squads/smoke-test-mint.ts",
+    "squads:preflight-mainnet": "tsx scripts/squads/preflight-mainnet.ts",
     "prepare": "husky"
   },
   "dependencies": {
