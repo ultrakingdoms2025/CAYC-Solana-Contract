@@ -22,3 +22,22 @@ scripts/deploy/verify-mint.ts(37,10): error TS2724: '"@solana/spl-token-metadata
 **Impact on Plan 03-03:** Pre-commit hook's Step 4 (`pnpm typecheck`) will fail on any commit while Plan 03-02 is mid-flight. Plan 03-03's own file (`scripts/assets/upload-metadata.ts`) typechecks cleanly in isolation.
 
 **Resolution path:** Plan 03-02 executor will import `getTokenMetadata` from the correct source (likely `@solana/spl-token`'s metadata extension helpers, e.g., `getTokenMetadata` from `@solana/spl-token-metadata` exists in newer versions, or the correct v0.1.6 API is `unpack`/`pack` of the bytes). Once 03-02 commits the fix, Plan 03-03's remaining work (Task 3 post-checkpoint) will pass typecheck cleanly.
+
+**RESOLVED** by Plan 03-02 GREEN commit `e00fee6`: `getTokenMetadata` is re-exported from `@solana/spl-token` (tokenMetadata extension), NOT from `@solana/spl-token-metadata` (which only exposes codecs + instruction builders). Both `verify-mint.ts` and `verify-mint.test.ts` updated to import from `@solana/spl-token`. `pnpm typecheck` exits 0 post-fix.
+
+## From Plan 03-02 final gate (2026-04-20)
+
+### Prettier format warnings on files owned by other plans
+
+**Observed:** During Plan 03-02 final `pnpm format:check`, the following files failed formatting:
+
+```
+scripts/assets/resize-logo.ts    (owned by Plan 03-01)
+src/config/token-config.ts       (owned by Plan 03-01)
+```
+
+**Analysis:** These files were committed by Plan 03-01 (logo resize + token-config tasks) without running `prettier --write` or running it after a different prettier config state. Both files typecheck and lang-audit clean; the only gap is formatting.
+
+**Scope boundary:** Not fixing from Plan 03-02 — out-of-scope per executor deviation rules (files not created/modified by this plan). Will surface at any subsequent commit that stages either file; resolution belongs to Plan 03-01's executor (or a follow-up format-sweep chore commit by whichever plan next touches them).
+
+**Impact on Plan 03-02:** None — Plan 03-02's own files (`scripts/deploy/verify-mint.ts`, `scripts/deploy/verify-mint.test.ts`) both pass `prettier --check` individually.

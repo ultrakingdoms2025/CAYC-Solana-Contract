@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: "Plan 03-03 PAUSED at Task 2 checkpoint (human-verify). Task 1 committed (ee9515b): upload-metadata.ts + metadata-hosting.md + @ardrive/turbo-sdk installed. Awaiting user decision: Branch A (Arweave funded upload, ~0.01 SOL devnet) or Branch B (GitHub raw mirror only, zero cost, devnet-acceptable only). DO NOT execute Task 3 until user returns resume signal."
-last_updated: "2026-04-20T17:28:47.384Z"
-last_activity: "2026-04-20 — Plan 02-06 COMPLETE (artifact publication + signer-roster finalization, 9min wall clock). GOV-03 closed. Phase 2 at 6/6 plans. Next phase: Phase 3 Devnet Full Rehearsal."
+status: in_progress
+stopped_at: "Plan 03-01 COMPLETE. src/config/token-config.ts SSOT shipped (9 tests, locked launch strings), assets/logo-{source,512,1024}.png with 19KB/38KB derivatives (well under 100KB cap), assets/metadata/rehearsal-{1,2}.json with placeholder Arweave URIs. Plan 03-02 also COMPLETE in parallel wave. Plan 03-03 PAUSED at Task 2 checkpoint (Arweave fund vs GitHub-mirror-only decision)."
+last_updated: "2026-04-20T17:32:29Z"
+last_activity: "2026-04-20 — Plan 03-01 COMPLETE (token-config SSOT + logo derivatives + metadata JSON, 13min wall clock). Two parallel-wave attribution collisions documented; content correct on disk. Wave 1 now: 03-01 DONE, 03-02 DONE, 03-03 PAUSED at checkpoint."
 progress:
   total_phases: 7
   completed_phases: 2
   total_plans: 17
-  completed_plans: 10
-  percent: 100
+  completed_plans: 13
+  percent: 76
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-04-19)
 
 ## Current Position
 
-Phase: 2 of 7 (Squads Multisig Setup — Devnet + Mainnet) — COMPLETE
-Plan: 6 of 6 in current phase COMPLETE (02-06 artifact publication DONE; next phase: Phase 3 Devnet Full Rehearsal)
+Phase: 3 of 7 (Devnet Full Rehearsal) — IN PROGRESS
+Plan: 1 of 7 in current phase COMPLETE (03-01 token-config SSOT + logo + metadata JSON DONE; 03-02 verify-mint DONE; 03-03 upload-metadata PAUSED at Task 2 checkpoint)
 Status: Phase 2 COMPLETE 2026-04-20. Plan 02-06 closed GOV-03 via docs/security/signer-roster.md v1.1 (commit b89c19d) — all 5 voting-member pubkeys (DwK4842..., G28iLXu..., 5BnDpWn..., HBEqzqW..., KzCZnpm...) + proposer pubkey (2gUjoCG...) populated from artifacts/mainnet.json with role-indexed pseudonyms (cayc-alpha..epsilon + cayc-proposer). No real names. scripts/squads/publish-artifacts.ts (commit 02fc972) is an idempotent artifact-internal-consistency validator: pubkey format, threshold=3, voting_member_count=5, program_id matches SQUADS_V4_PROGRAM_ID, Pitfall 11 clean, creation_tx_signature base58, vault-PDA re-derivation pure-math match. Explicitly documented as NOT an on-chain authority check — GOV-04 mainnet arm remains Phase 4 DEP-04's responsibility (no mainnet mint exists in Phase 2). artifacts/mainnet.json now embeds squads.ceremony_transcript='artifacts/mainnet-sessions/multisig-creation.md'. Phase 2 requirements state: GOV-01 (Plan 02-02), GOV-02 (Plan 02-05), GOV-03 (THIS plan) FULLY CLOSED; GOV-04 PARTIAL (devnet arm closed by Plan 02-03; mainnet arm deferred to Phase 4 DEP-04). Phase 2 Success Criterion 3 MET. Phase 3 (Devnet Full Rehearsal) UNBLOCKED.
 Last activity: 2026-04-20 — Plan 02-06 COMPLETE (artifact publication + signer-roster finalization, 9min wall clock). GOV-03 closed. Phase 2 at 6/6 plans. Next phase: Phase 3 Devnet Full Rehearsal.
 
-Progress: [██████████] 100%
+Progress: [████████░░] 76% (13/17 plans)
 
 ## Performance Metrics
 
@@ -60,6 +60,8 @@ Progress: [██████████] 100%
 | Phase 02-squads-multisig-setup-devnet-mainnet P04 | 7min | 2 tasks | 5 files |
 | Phase 02-squads-multisig-setup-devnet-mainnet P05 | 5min | 2 tasks | 3 files |
 | Phase 02-squads-multisig-setup-devnet-mainnet P06 | 9min | 2 tasks | 5 files |
+| Phase 03-devnet-full-rehearsal P02 | 19min | 2 tasks | 3 files |
+| Phase 03-devnet-full-rehearsal P01 | 13min | 3 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -113,6 +115,12 @@ Decisions are logged in PROJECT.md Key Decisions table. Locked constraints drivi
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] docs/security/ pseudonymous roster pattern: docs/security/signer-roster.md committed with 5 voting + 1 proposer slots; pubkeys left as literal placeholder strings (_filled in Plan 02-06 from mainnet ceremony transcript_) so reviewers see which slots are pending. docs/security/ is excluded from pnpm lang:audit per docs/style-guide.md §8 but still avoids banned terms. Identity-marker grep (real name|given name|surname|first name|last name) must return empty — enforces pseudonymous commitment.
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: Plan 02-05 mainnet ceremony EXECUTED 2026-04-20T15:20:16.898Z. Multisig 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR / Vault PDA CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR / 3-of-5 threshold / tx Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs slot 414500481. Preflight 12/12 pass (22min before ceremony). Pitfall 11 clean (byte-level multisig != vault). verify-vault confirmed Threshold 3 of 6 on-chain (5 voting mask=7 + 1 proposer mask=1). GOV-02 CLOSED. Phase 2 Success Criterion 2 verified. Phase 4 mint ceremony inherits vault_pda as mint/freeze/update/Permanent-Delegate authority.
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: Plan 02-06 COMPLETE — docs/security/signer-roster.md v1.1 finalized with 5 voting + 1 proposer pubkeys from artifacts/mainnet.json, pseudonyms cayc-alpha..epsilon + cayc-proposer. scripts/squads/publish-artifacts.ts is idempotent artifact-consistency validator (NOT on-chain check). GOV-03 CLOSED. GOV-04 mainnet arm explicitly DEFERRED to Phase 4 DEP-04 (no mainnet mint exists in Phase 2). Phase 2 now 6/6 plans complete.
+- [Phase 03-devnet-full-rehearsal]: [Phase 03] Plan 03-02 verify-mint.ts: getTokenMetadata is re-exported from @solana/spl-token (tokenMetadata extension), NOT from @solana/spl-token-metadata. The low-level @solana/spl-token-metadata package only exposes codecs + instruction builders. Plan interface spec was wrong; corrected in GREEN phase. Downstream verify-mint consumers import from @solana/spl-token.
+- [Phase 03-devnet-full-rehearsal]: [Phase 03] Plan 03-02 verify-mint contract: runVerify({connection, mint, expectedVault, rehearsal}) returns { ok, errors[] }; eager error collection (NOT fail-fast) so a single run surfaces every drift. verifyVaultAuthority called for mint/freeze/update authorities (Pitfall 11 guard); VaultMismatchError.message (names both pubkeys + cites PITFALLS.md) propagated verbatim. CLI guard via argv[1].endsWith('verify-mint.ts') — firing false during vitest import. Mock-level vitest tests chosen over bankrun for the READ-only verifier (6 tests, <1.3s).
+- [Phase 03-devnet-full-rehearsal]: [Phase 03] Plan 03-01 src/config/token-config.ts SSOT: TOKEN_NAME 'Cyber Ape Yacht Club 8G', TOKEN_SYMBOL 'CAYC', TOKEN_DESCRIPTION 'Payment token for Cyber Ape Yacht Club. Squads 3-of-5 multisig.', TOKEN_DECIMALS 6, TOKEN_WEBSITE_URL 'https://cayc.io', TOKEN_EXTENSIONS [MetadataPointer, PermanentDelegate] (order matters — Pattern 3), INITIAL_SUPPLY_RAW 500_000_000n * 10n ** 6n. REHEARSAL_2_METADATA fields REFERENCE TOKEN_NAME/SYMBOL/DESCRIPTION/WEBSITE_URL (not duplicate literals) so a launch-string edit touches exactly one const. REHEARSAL_1_METADATA uses distinct symbol 'REH1'. 9 vitest behaviors guard exact-string invariants + banned-term regex + extension ordering.
+- [Phase 03-devnet-full-rehearsal]: [Phase 03] Plan 03-01 logo pipeline: sharp ^0.33 (compressionLevel:9 + palette:true) produces 512x512 and 1024x1024 derivatives at 19KB (19%) and 38KB (38%) of the 100KB wallet cap — no oxipng pass needed for current source. scripts/assets/resize-logo.ts is idempotent (renameSync only if target absent) and fails fast on size cap. If future source pushes derivative over cap, add oxipng — do NOT silently skip the gate.
+- [Phase 03-devnet-full-rehearsal]: [Phase 03] Plan 03-01 metadata JSON: assets/metadata/rehearsal-{1,2}.json use literal 'PLACEHOLDER_REH*_ARWEAVE_URL' as image sentinel; Plan 03-03 substitutes real Arweave TX URLs pre-upload. Any human-edited JSON that forgets to replace placeholder is caught by `grep 'PLACEHOLDER' assets/metadata/*.json` one-liner. rehearsal-2.json matches src/config/token-config.ts REHEARSAL_2_METADATA byte-for-byte.
+- [Phase 03-devnet-full-rehearsal]: [Phase 03] Plan 03-01 parallel-wave commit-attribution collisions: concurrent 03-02 agent's `git commit -a` swept Plan 03-01's staged-but-uncommitted files into its own commits twice (token-config.ts/.test.ts into 0e1c8ee; assets/metadata/*.json into e00fee6). Content on disk is correct; attribution is misrepresented in git log. Mitigation: SUMMARY.md documents true ownership; future parallel-wave executions should stage explicitly by path (`git add <specific-files>`) and avoid `git commit -a`. Task 2 committed cleanly (3b99e4a) because no concurrent sweep interleaved.
 
 ### Pending Todos
 
@@ -140,6 +148,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-20T17:28:47.381Z
-Stopped at: Plan 03-03 PAUSED at Task 2 checkpoint (human-verify). Task 1 committed (ee9515b): upload-metadata.ts + metadata-hosting.md + @ardrive/turbo-sdk installed. Awaiting user decision: Branch A (Arweave funded upload, ~0.01 SOL devnet) or Branch B (GitHub raw mirror only, zero cost, devnet-acceptable only). DO NOT execute Task 3 until user returns resume signal.
+Last session: 2026-04-20T17:36:05.439Z
+Stopped at: Plan 03-02 COMPLETE. verify-mint.ts shipped (runVerify + CLI), 6 unit tests green, Pitfall 11 guard present. Next: parallel plans 03-01 and 03-03 still in flight; Phase 3 Wave 2+ unblocked by verify-mint availability.
 Resume file: None
