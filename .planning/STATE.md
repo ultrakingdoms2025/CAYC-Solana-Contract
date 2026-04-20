@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Completed 02-01-PLAN.md (src/squads helper module + src/env/load.ts + scripts/squads generator+verifier; 8 vitest tests passing; gitleaks PATH gate closed session-wide). Plan 02-02 (devnet multisig creation via SDK) is next — imports from src/squads are ready.
-last_updated: "2026-04-20T04:25:46.986Z"
-last_activity: "2026-04-19 — Plan 01-04 finalized (docs/style-guide.md v1.0 + scripts/check-language.sh + .langauditrc.json + .husky/pre-commit integration). Language audit is self-enforcing from this commit onward: any public-facing copy introducing banned terms outside the allowlist is blocked at pre-commit time."
+status: verifying
+stopped_at: Completed 02-02-PLAN.md (devnet Squads v4 multisig live on-chain; artifacts/devnet.json authoritative; .env.devnet populated; GOV-01 closed). Plan 02-03 (rotation drill + smoke-test mint) is next — refund signer wallets before running since faucet daily limit hit during 02-02.
+last_updated: "2026-04-20T04:45:48.948Z"
+last_activity: 2026-04-20 — Plan 02-02 complete (d951edf); GOV-01 CLOSED. Plan 02-03 (rotation drill + smoke-test mint) is next — imports from src/squads + reads artifacts/devnet.json.
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 10
-  completed_plans: 5
-  percent: 100
+  completed_plans: 6
+  percent: 60
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-04-19)
 ## Current Position
 
 Phase: 2 of 7 (Squads Multisig Setup — Devnet + Mainnet) — IN PROGRESS
-Plan: 1 of 6 in current phase COMPLETE (02-01 src/squads helper substrate shipped; next: 02-02 devnet multisig creation via SDK)
-Status: Plan 02-01 complete. src/squads helper module exposes deriveMultisigPda, deriveVaultPda, buildVotingMembers, buildProposerMember, verifyVaultAuthority, VaultMismatchError, buildConnection, loadMultisig, SQUADS_V4_PROGRAM_ID, MAINNET_THRESHOLD=3, MAINNET_SIGNER_COUNT=5. src/env/load.ts enforces CONFIRM_MAINNET=yes-mainnet-ceremony guard. scripts/squads/{generate-devnet-signers,verify-vault}.ts + README.md committed. 8 vitest tests passing. Pitfall 11 mechanized. gitleaks PATH gate closed session-wide.
-Last activity: 2026-04-20 — Plan 02-01 complete (e63a564 + a888b1c); GOV-01 and GOV-04 substrate built (requirements remain pending — close in 02-02 and 02-05 respectively).
+Plan: 2 of 6 in current phase COMPLETE (02-02 devnet Squads v4 multisig live on-chain; next: 02-03 rotation drill + smoke-test mint)
+Status: Plan 02-02 complete. Devnet multisig 6Pu2arj3tnaVG7wRE1WB8qFdTssqwertg4svKnoBMEVu live on-chain (Squads v4 program SQDS4ep65T869zMMBKyuUq6aD6EgTu8psMjkvj52pCf); vault PDA 5tTobJ2HLuuKZxXGLYZW1Wo2ojVhD1wZfoFDxDUkKtHu (distinct — Pitfall 11 verified); threshold 3 of 6 (5 voting + 1 proposer-only); self-managed configAuthority; timeLock=0. scripts/squads/create-devnet.ts + artifacts/devnet.json committed; .env.devnet populated (gitignored). proposer keypair funded (1.9 SOL via transfer from id-devnet.json — daily faucet limit hit); 5 signer keypairs unfunded (0 SOL — OK for this plan, refund in 02-03).
+Last activity: 2026-04-20 — Plan 02-02 complete (d951edf); GOV-01 CLOSED. Plan 02-03 (rotation drill + smoke-test mint) is next — imports from src/squads + reads artifacts/devnet.json.
 
-Progress: [█████░░░░░] 50%
+Progress: [██████░░░░] 60%
 
 ## Performance Metrics
 
@@ -55,6 +55,7 @@ Progress: [█████░░░░░] 50%
 | Phase 01-foundation P02 | 9min | 3 tasks | 22 files |
 | Phase 01-foundation P01 | 18min | 2 tasks | 1 file |
 | Phase 02-squads-multisig-setup-devnet-mainnet P01 | 7min | 2 tasks | 11 files |
+| Phase 02-squads-multisig-setup-devnet-mainnet P02 | 10min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -94,6 +95,11 @@ Decisions are logged in PROJECT.md Key Decisions table. Locked constraints drivi
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Pitfall 11 mechanized via src/squads: deriveVaultPda() is the ONLY vault-derivation path; VaultMismatchError throws with both addresses + PITFALLS.md reference; verifyVaultAuthority() must be called before any authority-set transaction. Downstream scripts import from src/squads, never @sqds/multisig PDA helpers directly.
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Mainnet config authority convention: Squads v4 Multisig.configAuthority is a PublicKey (not nullable); the 'self-managed / null' semantic is configAuthority.equals(PublicKey.default) (all-zero bytes). verify-vault.ts prints the pubkey with an (all-zero → self-managed) suffix when this case matches.
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Session gitleaks PATH recipe (from Plan 02-01 onward): export PATH="/c/Users/markc/AppData/Local/Microsoft/WinGet/Packages/Gitleaks.Gitleaks_Microsoft.Winget.Source_8wekyb3d8bbwe:$PATH" — must be re-applied in any new shell session for the rest of Phase 2. Each continuation-agent plan re-applies before first git commit or pnpm gitleaks.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Devnet faucet exhaustion workaround: when Helius ('1 SOL per project per day') and public devnet ('daily airdrop limit') both exhausted, transfer SOL from the pre-funded id-devnet.json keypair (GEqTsuKzWbTMMqipcvwrbqGxkDeEKTUXQyeigSR8DiY3) to the proposer. Signer members[] wallets do NOT need funding for multisigCreateV2 itself (SDK signature only requires createKey + creator as Signers); refund signers before Plan 02-03 rotation drill when their keys actually sign.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] RPC confirmed-state lag mitigation: post-multisigCreateV2 loadMultisig can fail with 'Unable to find Multisig account' even though the tx confirmed, because confirmed-commitment RPC nodes index tx-pipeline before account-read-path. Fix: retry-with-backoff (10 attempts, 1s initial, 5s cap) on any post-tx account read. Pattern applies to Plan 02-05 mainnet ceremony. Consider hoisting to src/squads helper if re-used in 02-03+.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] artifacts/devnet.json shape: { network, generated_at, squads: {...}, notes: [...] } with network-agnostic top-level and 'squads' sub-object. Phase 3+ plans append sibling keys (mint: {...}, treasury: {...}) via {...prior, ...artifact} merge-on-write; squads is never mutated. Same shape template applies to artifacts/mainnet.json in Plan 02-05.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Devnet multisig 6Pu2arj3tnaVG7wRE1WB8qFdTssqwertg4svKnoBMEVu + vault PDA 5tTobJ2HLuuKZxXGLYZW1Wo2ojVhD1wZfoFDxDUkKtHu is the canonical Phase 2+3 devnet authority. Pitfall 11: multisig != vault; all Phase 3+ authorities (mint/freeze/update/permanent-delegate) MUST point to vault_pda, NEVER multisig_address. One orphaned first-attempt multisig at H1QWPbfzZn57Z3G6G96N6n1Z2XuLBtP5u75b5ZzJn2dy is accepted cruft (~0.003 SOL devnet rent, no operational impact).
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] scripts/squads/* driver template: loadEnv(network) → buildConnection(network) → Keypair loads from gitignored keys/ → SDK call → retry-on-read → artifact+env merge-write. Idempotence via existsSync(artifactPath) + populated-key check + --force override. Applies to 02-03 rotation, 02-05 mainnet ceremony, and Phase 4 mint creation scripts.
 
 ### Pending Todos
 
@@ -116,6 +122,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-20T04:25:27.770Z
-Stopped at: Completed 02-01-PLAN.md (src/squads helper module + src/env/load.ts + scripts/squads generator+verifier; 8 vitest tests passing; gitleaks PATH gate closed session-wide). Plan 02-02 (devnet multisig creation via SDK) is next — imports from src/squads are ready.
+Last session: 2026-04-20T04:45:48.944Z
+Stopped at: Completed 02-02-PLAN.md (devnet Squads v4 multisig live on-chain; artifacts/devnet.json authoritative; .env.devnet populated; GOV-01 closed). Plan 02-03 (rotation drill + smoke-test mint) is next — refund signer wallets before running since faucet daily limit hit during 02-02.
 Resume file: None
