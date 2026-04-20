@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Completed 02-03-PLAN.md (rotation drill + smoke-test mint done; src/squads/proposals.ts lifecycle helpers; docs/runbooks/authority-rotation.md; Pitfall 11 negative test captured). Plan 02-04 (mainnet preflight) is next.
-last_updated: "2026-04-20T05:10:17.873Z"
-last_activity: 2026-04-20 — Plan 02-03 complete (aa6d41c); GOV-04 devnet arm CLOSED. Plan 02-04 (mainnet preflight) is next — first plan that requires HELIUS_MAINNET_RPC_URL.
+status: verifying
+stopped_at: Completed 02-04-PLAN.md (mainnet ceremony preflight runbook + pseudonymous signer-roster template + scripts/squads/preflight-mainnet.ts + artifacts/mainnet-preflight.json pre-ceremony fail artifact). Plan 02-05 (mainnet ceremony — CHECKPOINT plan, requires 5 humans with Ledgers) is next.
+last_updated: "2026-04-20T05:26:52.994Z"
+last_activity: 2026-04-20 — Plan 02-04 complete (3a4eff5); mainnet preflight gate in place. Plan 02-05 (mainnet Squads v4 creation ceremony) is next — first plan with human-in-the-loop ceremony checkpoints (5 humans + 5 Ledgers + funded proposer + Helius Business tier).
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 10
-  completed_plans: 7
-  percent: 70
+  completed_plans: 8
+  percent: 80
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-04-19)
 ## Current Position
 
 Phase: 2 of 7 (Squads Multisig Setup — Devnet + Mainnet) — IN PROGRESS
-Plan: 3 of 6 in current phase COMPLETE (02-03 rotation drill + smoke-test mint done; next: 02-04 mainnet preflight)
-Status: Plan 02-03 complete. Devnet rotation drill (AddMember + RemoveMember, net-zero) + smoke-test mint (Token-2022 mint authority=vault PDA, multisig-signed mintTo of 1M raw units, Pitfall 11 negative test captured "Error: owner does not match") both executed end-to-end on devnet. src/squads/proposals.ts lifecycle helpers (proposeVaultTransaction, approveProposal, executeVaultTransaction, proposeConfigTransaction, executeConfigTransaction) with inter-RPC confirmation baked in — reusable by Phase 4 mainnet mint creation. docs/runbooks/authority-rotation.md (301 lines) published. GOV-04 DEVNET ARM closed; MAINNET ARM still deferred to Phase 4 DEP-04 (requires production mint to exist). Phase 2 Success Criteria 1 (rotation drill) + 4 (devnet byte-level mint proof) satisfied.
-Last activity: 2026-04-20 — Plan 02-03 complete (aa6d41c); GOV-04 devnet arm CLOSED. Plan 02-04 (mainnet preflight) is next — first plan that requires HELIUS_MAINNET_RPC_URL.
+Plan: 4 of 6 in current phase COMPLETE (02-04 mainnet preflight substrate done; next: 02-05 mainnet ceremony — CHECKPOINT plan)
+Status: Plan 02-04 complete. Mainnet ceremony preflight runbook (docs/runbooks/mainnet-squads-ceremony-preflight.md, 5 stages A-E, 175 lines) + pseudonymous signer-roster template (docs/security/signer-roster.md, 5 voting + 1 proposer slots, 116 lines) + automated Stage E gate script (scripts/squads/preflight-mainnet.ts, 12 checks E0-E11, safeEndpoint API-key hygiene + finalize-time refuse-to-write guard) + artifacts/mainnet-preflight.json (pre-ceremony fail artifact: correct signal that Plan 02-05 is blocked pending .env.mainnet population). ROADMAP-vs-CONTEXT vendor-diversity ACCEPTED TRADEOFF encoded verbatim in both runbook Stage A3 and roster §Vendor diversity (grep-verifiable tokens: "vendor diversity", "all-Ledger", "accepted tradeoff") — silent removal would break CI. GOV-02 + GOV-03 substrate laid; both close in Plans 02-05 and 02-06 respectively.
+Last activity: 2026-04-20 — Plan 02-04 complete (3a4eff5); mainnet preflight gate in place. Plan 02-05 (mainnet Squads v4 creation ceremony) is next — first plan with human-in-the-loop ceremony checkpoints (5 humans + 5 Ledgers + funded proposer + Helius Business tier).
 
-Progress: [███████░░░] 70%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
@@ -57,6 +57,7 @@ Progress: [███████░░░] 70%
 | Phase 02-squads-multisig-setup-devnet-mainnet P01 | 7min | 2 tasks | 11 files |
 | Phase 02-squads-multisig-setup-devnet-mainnet P02 | 10min | 2 tasks | 2 files |
 | Phase 02-squads-multisig-setup-devnet-mainnet P03 | 14min | 3 tasks | 11 files |
+| Phase 02-squads-multisig-setup-devnet-mainnet P04 | 7min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -104,6 +105,10 @@ Decisions are logged in PROJECT.md Key Decisions table. Locked constraints drivi
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Inter-RPC confirmation wait baked into src/squads/proposals.ts: @sqds/multisig RPC helpers use sendTransaction without awaiting confirmation, causing AnchorError 6009 InvalidTransactionIndex when chaining configTransactionCreate → proposalCreate back-to-back. Fix: every lifecycle helper now calls connection.confirmTransaction(sig, 'confirmed') before returning. Phase 4 mainnet mint creation inherits this fix for free.
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] rentPayer: proposer is REQUIRED for AddMember configTransactionExecute — voting signers hold ~0.02 SOL (tx fees only) and cannot cover the ~0.002 SOL rent grow. Default rentPayer=executor is only safe for RemoveMember / ChangeThreshold (shrink or no-op). Documented in docs/runbooks/authority-rotation.md.
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Pitfall 11 devnet existence proof: throwaway Token-2022 mint J516PvBznTVHT9xDtWs2Qc6rBk3y9DqaK5JdCSUh2RbJ with mint+freeze authorities=vault PDA; multisig-signed mintTo of 1_000_000 raw units to recipient ATA succeeded. Negative test captured byte-level failure signature {"InstructionError":[0,{"Custom":4}]} + 'Error: owner does not match' as the prod-monitoring-recognizable failure if Pitfall 11 is ever bypassed. artifacts/devnet.json.devnet_smoke_test.pitfall_11_negative_test_captured: true. GOV-04 devnet arm closed; mainnet arm deferred to Phase 4 DEP-04.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Mainnet preflight gate artifact pattern: read-only script emits artifacts/mainnet-preflight.json with schema { generated_at, commit_sha, overall: 'pass'|'fail', check_count, pass_count, checks: [{ id, description, pass, detail }] }. Plan 02-05 first task reads this and aborts unless overall=pass. Committed pre-ceremony artifact has overall=fail by design (E0 = .env.mainnet missing) — correct signal that 02-05 is blocked.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] API-key hygiene pattern: safeEndpoint(url) in scripts/squads/preflight-mainnet.ts strips query strings (new URL → protocol+host+pathname) before any URL enters an artifact/log/error. Finalize-time regex /api[-_]?key\s*=/i on the serialized JSON refuses to write and exits 2 (distinct from exit 1 overall=fail) — defense-in-depth against future code paths bypassing safeEndpoint(). Template for Plan 02-05 mainnet-ceremony artifact and Plan 02-06 publication artifact.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Grep-verifiable tradeoff acknowledgement pattern: when a plan overrides a ROADMAP success criterion, acceptance criteria grep for exact literal tokens in committed docs. For the all-Ledger-vs-vendor-diversity override: tokens 'vendor diversity', 'all-Ledger', 'accepted tradeoff' must appear in docs/runbooks/mainnet-squads-ceremony-preflight.md Stage A3 AND docs/security/signer-roster.md §Vendor diversity. Silent edit removing the acknowledgement fails CI.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] docs/security/ pseudonymous roster pattern: docs/security/signer-roster.md committed with 5 voting + 1 proposer slots; pubkeys left as literal placeholder strings (_filled in Plan 02-06 from mainnet ceremony transcript_) so reviewers see which slots are pending. docs/security/ is excluded from pnpm lang:audit per docs/style-guide.md §8 but still avoids banned terms. Identity-marker grep (real name|given name|surname|first name|last name) must return empty — enforces pseudonymous commitment.
 
 ### Pending Todos
 
@@ -123,9 +128,10 @@ None yet.
 - **Phase 5 Freeze Transparency Log bootstrap obligation:** On the same day the Clawback/Freeze Policy takes effect on caycsolana.com, publish `docs/security/freeze-transparency-log.md` with Entry 0 (policy effective date marker). Schema specified in Clawback/Freeze Policy §8 — Phase 5 Ops Runbook must not improvise.
 - **Phase 5 research flag:** Jupiter V3 organic score accumulation timeline is not well-benchmarked for new tokens; budget for Express Review (1,000 JUP burn) if organic path lags. Accept-conflict decision adds Jupiter Verify V3 submission friction — proactive outreach with full-name "CAYC (Cyber Ape Yacht Club)" context is mandatory.
 - **Phase 7 research flag:** Individual CEX compliance checklists change frequently; each target CEX requires fresh research at time of outreach. All CEX applications use "CAYC (Cyber Ape Yacht Club)" in legal disclosures. Both policy files become mandatory attachments per CEX-01.
+- Plan 02-05 ceremony prerequisites (human-only, must complete BEFORE 02-05): (a) 5 signers update Ledger firmware + Solana app + enable Blind signing; (b) each signer performs metal-plate seed read-back; (c) 5 signer pubkeys captured via encrypted channel; (d) Helius Business tier confirmed, ~20 tx of headroom; (e) proposer mainnet keypair generated + funded >=2 SOL; (f) each of 5 signer pubkeys funded >=0.5 SOL; (g) .env.mainnet populated; (h) pnpm squads:preflight-mainnet -> artifacts/mainnet-preflight.json overall=pass. Enumerated in docs/runbooks/mainnet-squads-ceremony-preflight.md Stages A-E.
 
 ## Session Continuity
 
-Last session: 2026-04-20T05:09:52.806Z
-Stopped at: Completed 02-03-PLAN.md (rotation drill + smoke-test mint done; src/squads/proposals.ts lifecycle helpers; docs/runbooks/authority-rotation.md; Pitfall 11 negative test captured). Plan 02-04 (mainnet preflight) is next.
+Last session: 2026-04-20T05:26:10.403Z
+Stopped at: Completed 02-04-PLAN.md (mainnet ceremony preflight runbook + pseudonymous signer-roster template + scripts/squads/preflight-mainnet.ts + artifacts/mainnet-preflight.json pre-ceremony fail artifact). Plan 02-05 (mainnet ceremony — CHECKPOINT plan, requires 5 humans with Ledgers) is next.
 Resume file: None
