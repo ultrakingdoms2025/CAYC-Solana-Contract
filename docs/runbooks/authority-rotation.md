@@ -61,8 +61,7 @@ RemoveMember in a single proposal makes reviewer verification harder).
 ### 1. Build the proposal
 
 ```typescript
-import { proposeConfigTransaction, approveProposal, executeConfigTransaction }
-  from 'src/squads';
+import { proposeConfigTransaction, approveProposal, executeConfigTransaction } from 'src/squads';
 import * as multisig from '@sqds/multisig';
 
 const proposal = await proposeConfigTransaction({
@@ -73,8 +72,8 @@ const proposal = await proposeConfigTransaction({
     {
       __kind: 'AddMember',
       newMember: {
-        key: NEW_SIGNER_PUBKEY,              // Verified out-of-band
-        permissions: multisig.types.Permissions.all(),  // Full voting (mask=7)
+        key: NEW_SIGNER_PUBKEY, // Verified out-of-band
+        permissions: multisig.types.Permissions.all(), // Full voting (mask=7)
       },
     },
   ],
@@ -122,8 +121,8 @@ const execSig = await executeConfigTransaction({
   connection,
   multisigPda,
   transactionIndex: proposal.transactionIndex,
-  executor: ANY_VOTING_SIGNER,       // Any member with Execute permission
-  rentPayer: proposer,               // CRITICAL for AddMember — see note below
+  executor: ANY_VOTING_SIGNER, // Any member with Execute permission
+  rentPayer: proposer, // CRITICAL for AddMember — see note below
 });
 ```
 
@@ -174,9 +173,7 @@ const proposal = await proposeConfigTransaction({
   connection,
   multisigPda,
   proposer,
-  actions: [
-    { __kind: 'RemoveMember', oldMember: OLD_SIGNER_PUBKEY },
-  ],
+  actions: [{ __kind: 'RemoveMember', oldMember: OLD_SIGNER_PUBKEY }],
   memo: 'RemoveMember: <signer-display-name> per ticket ROTATION-NNNN',
 });
 ```
@@ -296,6 +293,6 @@ The drill ran on `2026-04-20` against devnet multisig
 
 ## Version history
 
-| Version | Date       | Change                                                       |
-| ------- | ---------- | ------------------------------------------------------------ |
+| Version | Date       | Change                                                        |
+| ------- | ---------- | ------------------------------------------------------------- |
 | 1.0     | 2026-04-20 | Initial publication from Plan 02-03 devnet drill observations |

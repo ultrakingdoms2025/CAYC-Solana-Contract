@@ -26,5 +26,24 @@
   "notes": [
     "PITFALLS.md Pitfall 11: Authorities MUST be vault_pda, NOT multisig_address.",
     "Devnet keys are throwaway — mainnet uses Ledgers, a different ceremony (Plan 02-05)."
-  ]
+  ],
+  "devnet_smoke_test": {
+    "throwaway_mint": "J516PvBznTVHT9xDtWs2Qc6rBk3y9DqaK5JdCSUh2RbJ",
+    "recipient": "AkAHF7vdH66Ly6mgfkpRnTUPLdEM4xyLfBZP6b3jDhmL",
+    "recipient_ata": "vcd179b5ZQFjzszMP9qV95cD3aoZDRvrh2vAwzx1s5Q",
+    "amount_minted_raw": "1000000",
+    "vault_transaction_index": "4",
+    "execute_tx": "3GCGNTTir7KMu8X5uS4JUdjkYTUTVNg19Bk6X8XLqhL3igzsbNNs5gW4siibZRKzbtLicGX7AyeLN2kLzXGemfEk",
+    "pitfall_11_negative_test_captured": true,
+    "proved_at": "2026-04-20T05:02:36.048Z"
+  },
+  "devnet_rotation_drill": {
+    "drill_at": "2026-04-20T05:02:36.048Z",
+    "pre_drill_member_count": 6,
+    "post_drill_member_count": 6,
+    "add_member_tx": "4KAQvUmXpMBfKw5baPEGRuHoVHrrT3rSJLZ7rzJVASVZf4rL97JAeQ9UZ2PrGjLc9akmTMtCXWst6yefyuQYxAuE",
+    "remove_member_tx": "437EwdnwJhqEZL1t1h69VCTpcMTpaDuBS5eF5sz3wk9zs3gJXuTWPF6RPmoDRjQSaY5mZenoMt5HfRg1TNLSF9P9",
+    "throwaway_member_pubkey": "FCkfUQaoDdqENeYuVmBjXNnJ1w2CTog6nh8b6ph8ETxh",
+    "transcript": "artifacts/devnet-sessions/rotation-drill.md"
+  }
 }
