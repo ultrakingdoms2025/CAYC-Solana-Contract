@@ -76,7 +76,14 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The 500M devnet supply has been minted to a devnet treasury ATA in a **separate Squads proposal** from mint creation, not combined into one transaction.
   4. Every ongoing token capability has been exercised via the devnet multisig: additional mint (gated by Mint Policy), burn, standard SPL transfer, and authority rotation (mint/freeze/update transferred to a different signer and back). All four operations produce successful multisig-signed transactions.
   5. `artifacts/devnet.json` is committed with mint address, vault PDA, treasury ATA, authority hashes, and ceremony transcripts; `scripts/deploy/verify-mint.ts` confirms on-chain state matches `src/config/token-config.ts` exactly.
-**Plans**: TBD
+**Plans**: 7 plans
+- [ ] 03-01-PLAN.md — Logo resize + metadata JSON + src/config/token-config.ts single source of truth
+- [ ] 03-02-PLAN.md — scripts/deploy/verify-mint.ts + unit tests (on-chain state vs token-config assertion)
+- [ ] 03-03-PLAN.md — Arweave + GitHub raw metadata hosting for rehearsal JSONs (DEP-01/02 prereq)
+- [ ] 03-04-PLAN.md — Rehearsal 1 (throwaway metadata) devnet mint via Squads proposal (DEP-01)
+- [ ] 03-05-PLAN.md — Rehearsal 2 (locked launch metadata) + 500M supply in SEPARATE proposal + wallet-render verification (DEP-02)
+- [ ] 03-06-PLAN.md — OPS drill: additional mint (OPS-01), burn (OPS-02), transfer (OPS-03), authority rotation (OPS-04)
+- [ ] 03-07-PLAN.md — Phase 3 artifact validator + REHEARSAL-SUMMARY.md aggregator (Phase 4 readiness gate)
 
 **Canonical refs:**
 - `.planning/research/ARCHITECTURE.md` — Pattern 3 (Mint Init Ordering), Flow B (Devnet Ceremony), Anti-Pattern 4 (don't combine ceremonies)
@@ -157,7 +164,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 |-------|----------------|--------|-----------|
 | 1. Foundation — Policy, Legal, Dev Environment | 4/4 | Complete | 2026-04-19 |
 | 2. Squads Multisig Setup (Devnet + Mainnet) | 6/6 | Complete | 2026-04-20 |
-| 3. Devnet Full Rehearsal | 0/TBD | Not started | - |
+| 3. Devnet Full Rehearsal | 0/7 | Not started | - |
 | 4. Mainnet Launch Ceremony | 0/TBD | Not started | - |
 | 5. DEX Liquidity, Early Verification & Ops Go-Live | 0/TBD | Not started | - |
 | 6. Broader Listings (CoinGecko + CoinMarketCap) | 0/TBD | Not started | - |
