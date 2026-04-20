@@ -30,7 +30,8 @@
       "pass_count": 12,
       "check_count": 12
     },
-    "human_confirmation_timestamp": "2026-04-20T15:20:14.732Z"
+    "human_confirmation_timestamp": "2026-04-20T15:20:14.732Z",
+    "ceremony_transcript": "artifacts/mainnet-sessions/multisig-creation.md"
   },
   "notes": [
     "PITFALLS.md Pitfall 11: Authorities MUST be vault_pda, NOT multisig_address. Phase 4 mint ceremony uses vault_pda for mint/freeze/update authority AND Permanent Delegate.",
