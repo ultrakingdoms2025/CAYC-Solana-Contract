@@ -21,6 +21,7 @@
     "test:watch": "vitest",
     "squads:gen-devnet-signers": "tsx scripts/squads/generate-devnet-signers.ts",
     "squads:verify-vault": "tsx scripts/squads/verify-vault.ts",
+    "squads:create-devnet": "tsx scripts/squads/create-devnet.ts",
     "prepare": "husky"
   },
   "dependencies": {

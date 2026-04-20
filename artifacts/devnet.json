@@ -1,0 +1,30 @@
+{
+  "network": "devnet",
+  "generated_at": "2026-04-20T04:39:24.293Z",
+  "squads": {
+    "program_id": "SQDS4ep65T869zMMBKyuUq6aD6EgTu8psMjkvj52pCf",
+    "program_version": "v4",
+    "multisig_address": "6Pu2arj3tnaVG7wRE1WB8qFdTssqwertg4svKnoBMEVu",
+    "vault_pda": "5tTobJ2HLuuKZxXGLYZW1Wo2ojVhD1wZfoFDxDUkKtHu",
+    "create_key_pubkey": "9qncpn2Yd6NhAPpsh5SaED3YJwhnhZPFnPqGspWTpcDB",
+    "threshold": 3,
+    "voting_member_count": 5,
+    "proposer_only_pubkey": "4y7V9FM5mzrcTCKZPacWptSwmzSVnq8RWCtzonz2QQ3h",
+    "voting_members": [
+      "6DuNEzsRJM4Pzy9u6uqLUYwhZD2vZnJzAdMjSoD6dyot",
+      "CwMi8zGt1EL2EAwxUexDMM47JschS2xVyieZNE5x4jVS",
+      "7DQYN9KiNZj3evnQHeZdafPFLNZrJZjEKQjhXDZYifmn",
+      "3XhDfY8maLUFutbmpSqVZF4CMjM1bDHFj579S6yYzkjd",
+      "5MoGT9q3Tksi3AkQ4s61BYcAp7DqTn1Vr6L9FAJQouLp"
+    ],
+    "time_lock_slots": 0,
+    "config_authority": null,
+    "creation_tx_signature": "5hRX6hxuQpHiu3AL1e6e6Qmnh79b4kLTW9mqD72nmbJt52ZaR56LmQrt2LEp5kqHjn85FLdQrcRt7STPBHXY1Xcz",
+    "creation_slot": 456763617,
+    "explorer_url": "https://explorer.solana.com/tx/5hRX6hxuQpHiu3AL1e6e6Qmnh79b4kLTW9mqD72nmbJt52ZaR56LmQrt2LEp5kqHjn85FLdQrcRt7STPBHXY1Xcz?cluster=devnet"
+  },
+  "notes": [
+    "PITFALLS.md Pitfall 11: Authorities MUST be vault_pda, NOT multisig_address.",
+    "Devnet keys are throwaway — mainnet uses Ledgers, a different ceremony (Plan 02-05)."
+  ]
+}
