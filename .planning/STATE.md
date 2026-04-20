@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 02-04-PLAN.md (mainnet ceremony preflight runbook + pseudonymous signer-roster template + scripts/squads/preflight-mainnet.ts + artifacts/mainnet-preflight.json pre-ceremony fail artifact). Plan 02-05 (mainnet ceremony — CHECKPOINT plan, requires 5 humans with Ledgers) is next.
-last_updated: "2026-04-20T05:26:52.994Z"
+stopped_at: "Plan 02-05 Task 1 complete (88a03f4: scripts/squads/create-mainnet.ts written, typechecked, lang-audit clean, guarded non-confirmation path aborts cleanly). Task 2 (checkpoint:human-action) blocked on 5 humans + 5 Ledgers present + typed-phrase confirmation. No mainnet tx fired."
+last_updated: "2026-04-20T15:07:22.496Z"
 last_activity: 2026-04-20 — Plan 02-04 complete (3a4eff5); mainnet preflight gate in place. Plan 02-05 (mainnet Squads v4 creation ceremony) is next — first plan with human-in-the-loop ceremony checkpoints (5 humans + 5 Ledgers + funded proposer + Helius Business tier).
 progress:
   total_phases: 7
@@ -129,9 +129,10 @@ None yet.
 - **Phase 5 research flag:** Jupiter V3 organic score accumulation timeline is not well-benchmarked for new tokens; budget for Express Review (1,000 JUP burn) if organic path lags. Accept-conflict decision adds Jupiter Verify V3 submission friction — proactive outreach with full-name "CAYC (Cyber Ape Yacht Club)" context is mandatory.
 - **Phase 7 research flag:** Individual CEX compliance checklists change frequently; each target CEX requires fresh research at time of outreach. All CEX applications use "CAYC (Cyber Ape Yacht Club)" in legal disclosures. Both policy files become mandatory attachments per CEX-01.
 - Plan 02-05 ceremony prerequisites (human-only, must complete BEFORE 02-05): (a) 5 signers update Ledger firmware + Solana app + enable Blind signing; (b) each signer performs metal-plate seed read-back; (c) 5 signer pubkeys captured via encrypted channel; (d) Helius Business tier confirmed, ~20 tx of headroom; (e) proposer mainnet keypair generated + funded >=2 SOL; (f) each of 5 signer pubkeys funded >=0.5 SOL; (g) .env.mainnet populated; (h) pnpm squads:preflight-mainnet -> artifacts/mainnet-preflight.json overall=pass. Enumerated in docs/runbooks/mainnet-squads-ceremony-preflight.md Stages A-E.
+- Plan 02-05 Task 2 (mainnet Squads v4 multisig creation CEREMONY): script is written (88a03f4) and preflight artifact is passing (12/12, fresh). Ceremony is BLOCKED pending human-action checkpoint — requires all 5 voting signers + proposer operator synchronously present with Ledgers ready, and the typed phrase PROCEED WITH CAYC MAINNET CEREMONY. A continuation agent will drive the ceremony interactively once the user signals readiness. Do NOT mark GOV-02 complete or advance the plan counter until the ceremony artifact artifacts/mainnet.json is written and verify-vault confirms threshold=3 + members=6 on-chain.
 
 ## Session Continuity
 
-Last session: 2026-04-20T05:26:10.403Z
-Stopped at: Completed 02-04-PLAN.md (mainnet ceremony preflight runbook + pseudonymous signer-roster template + scripts/squads/preflight-mainnet.ts + artifacts/mainnet-preflight.json pre-ceremony fail artifact). Plan 02-05 (mainnet ceremony — CHECKPOINT plan, requires 5 humans with Ledgers) is next.
+Last session: 2026-04-20T15:07:08.284Z
+Stopped at: Plan 02-05 Task 1 complete (88a03f4: scripts/squads/create-mainnet.ts written, typechecked, lang-audit clean, guarded non-confirmation path aborts cleanly). Task 2 (checkpoint:human-action) blocked on 5 humans + 5 Ledgers present + typed-phrase confirmation. No mainnet tx fired.
 Resume file: None
