@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: "Plan 02-05 Task 1 complete (88a03f4: scripts/squads/create-mainnet.ts written, typechecked, lang-audit clean, guarded non-confirmation path aborts cleanly). Task 2 (checkpoint:human-action) blocked on 5 humans + 5 Ledgers present + typed-phrase confirmation. No mainnet tx fired."
-last_updated: "2026-04-20T15:07:22.496Z"
-last_activity: 2026-04-20 — Plan 02-04 complete (3a4eff5); mainnet preflight gate in place. Plan 02-05 (mainnet Squads v4 creation ceremony) is next — first plan with human-in-the-loop ceremony checkpoints (5 humans + 5 Ledgers + funded proposer + Helius Business tier).
+stopped_at: "Plan 02-05 COMPLETE. Mainnet Squads v4 multisig live at 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR / vault CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR (3-of-5 threshold, creation tx Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs slot 414500481). GOV-02 closed. Phase 2: 5/6 plans done; remaining 02-06 (artifact publication, GOV-03). Artifacts committed at 942c731; metadata commit pending."
+last_updated: "2026-04-20T15:29:05.489Z"
+last_activity: 2026-04-20 — Plan 02-05 COMPLETE (942c731 ceremony artifacts). Mainnet Squads v4 multisig live at 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR, vault PDA CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR, 3-of-5 threshold, creation tx confirmed slot 414500481. GOV-02 CLOSED. Phase 2 Success Criterion 2 verified. Remaining Phase 2 work: Plan 02-06 (artifact publication, GOV-03).
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 10
-  completed_plans: 8
-  percent: 80
+  completed_plans: 9
+  percent: 90
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-04-19)
 ## Current Position
 
 Phase: 2 of 7 (Squads Multisig Setup — Devnet + Mainnet) — IN PROGRESS
-Plan: 4 of 6 in current phase COMPLETE (02-04 mainnet preflight substrate done; next: 02-05 mainnet ceremony — CHECKPOINT plan)
-Status: Plan 02-04 complete. Mainnet ceremony preflight runbook (docs/runbooks/mainnet-squads-ceremony-preflight.md, 5 stages A-E, 175 lines) + pseudonymous signer-roster template (docs/security/signer-roster.md, 5 voting + 1 proposer slots, 116 lines) + automated Stage E gate script (scripts/squads/preflight-mainnet.ts, 12 checks E0-E11, safeEndpoint API-key hygiene + finalize-time refuse-to-write guard) + artifacts/mainnet-preflight.json (pre-ceremony fail artifact: correct signal that Plan 02-05 is blocked pending .env.mainnet population). ROADMAP-vs-CONTEXT vendor-diversity ACCEPTED TRADEOFF encoded verbatim in both runbook Stage A3 and roster §Vendor diversity (grep-verifiable tokens: "vendor diversity", "all-Ledger", "accepted tradeoff") — silent removal would break CI. GOV-02 + GOV-03 substrate laid; both close in Plans 02-05 and 02-06 respectively.
-Last activity: 2026-04-20 — Plan 02-04 complete (3a4eff5); mainnet preflight gate in place. Plan 02-05 (mainnet Squads v4 creation ceremony) is next — first plan with human-in-the-loop ceremony checkpoints (5 humans + 5 Ledgers + funded proposer + Helius Business tier).
+Plan: 5 of 6 in current phase COMPLETE (02-05 mainnet ceremony DONE; next: 02-06 artifact publication / GOV-03)
+Status: Plan 02-05 complete (942c731 ceremony artifacts, metadata commit pending). Mainnet Squads v4 multisig live at 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR with vault PDA CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR (byte-level distinct from multisig — Pitfall 11 clean). Threshold 3-of-5, 5 voting members (Permissions.all, mask=7) + 1 proposer-only member (Permission.Initiate, mask=1). Creation tx Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs confirmed slot 414500481. verify-vault independently confirmed threshold=3, members=6, self-managed config authority (all-zero). Preflight 12/12 pass embedded in artifact as permanent audit trail. GOV-02 CLOSED. Phase 2 Success Criterion 2 verified. .env.mainnet updated in-place (gitignored) with MAINNET_SQUADS_MULTISIG_ADDRESS and MAINNET_SQUADS_VAULT_PDA — Phase 4 mint ceremony inherits vault_pda as sole authority.
+Last activity: 2026-04-20 — Plan 02-05 COMPLETE (mainnet ceremony executed, one-shot success, 5min wall clock). Remaining Phase 2 work: Plan 02-06 (publish finalized docs/security/signer-roster.md with pubkeys from ceremony transcript, validate artifacts/mainnet.json, close GOV-03).
 
-Progress: [████████░░] 80%
+Progress: [█████████░] 90%
 
 ## Performance Metrics
 
@@ -58,6 +58,7 @@ Progress: [████████░░] 80%
 | Phase 02-squads-multisig-setup-devnet-mainnet P02 | 10min | 2 tasks | 2 files |
 | Phase 02-squads-multisig-setup-devnet-mainnet P03 | 14min | 3 tasks | 11 files |
 | Phase 02-squads-multisig-setup-devnet-mainnet P04 | 7min | 2 tasks | 5 files |
+| Phase 02-squads-multisig-setup-devnet-mainnet P05 | 5min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -109,6 +110,7 @@ Decisions are logged in PROJECT.md Key Decisions table. Locked constraints drivi
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] API-key hygiene pattern: safeEndpoint(url) in scripts/squads/preflight-mainnet.ts strips query strings (new URL → protocol+host+pathname) before any URL enters an artifact/log/error. Finalize-time regex /api[-_]?key\s*=/i on the serialized JSON refuses to write and exits 2 (distinct from exit 1 overall=fail) — defense-in-depth against future code paths bypassing safeEndpoint(). Template for Plan 02-05 mainnet-ceremony artifact and Plan 02-06 publication artifact.
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Grep-verifiable tradeoff acknowledgement pattern: when a plan overrides a ROADMAP success criterion, acceptance criteria grep for exact literal tokens in committed docs. For the all-Ledger-vs-vendor-diversity override: tokens 'vendor diversity', 'all-Ledger', 'accepted tradeoff' must appear in docs/runbooks/mainnet-squads-ceremony-preflight.md Stage A3 AND docs/security/signer-roster.md §Vendor diversity. Silent edit removing the acknowledgement fails CI.
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] docs/security/ pseudonymous roster pattern: docs/security/signer-roster.md committed with 5 voting + 1 proposer slots; pubkeys left as literal placeholder strings (_filled in Plan 02-06 from mainnet ceremony transcript_) so reviewers see which slots are pending. docs/security/ is excluded from pnpm lang:audit per docs/style-guide.md §8 but still avoids banned terms. Identity-marker grep (real name|given name|surname|first name|last name) must return empty — enforces pseudonymous commitment.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: Plan 02-05 mainnet ceremony EXECUTED 2026-04-20T15:20:16.898Z. Multisig 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR / Vault PDA CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR / 3-of-5 threshold / tx Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs slot 414500481. Preflight 12/12 pass (22min before ceremony). Pitfall 11 clean (byte-level multisig != vault). verify-vault confirmed Threshold 3 of 6 on-chain (5 voting mask=7 + 1 proposer mask=1). GOV-02 CLOSED. Phase 2 Success Criterion 2 verified. Phase 4 mint ceremony inherits vault_pda as mint/freeze/update/Permanent-Delegate authority.
 
 ### Pending Todos
 
@@ -129,10 +131,11 @@ None yet.
 - **Phase 5 research flag:** Jupiter V3 organic score accumulation timeline is not well-benchmarked for new tokens; budget for Express Review (1,000 JUP burn) if organic path lags. Accept-conflict decision adds Jupiter Verify V3 submission friction — proactive outreach with full-name "CAYC (Cyber Ape Yacht Club)" context is mandatory.
 - **Phase 7 research flag:** Individual CEX compliance checklists change frequently; each target CEX requires fresh research at time of outreach. All CEX applications use "CAYC (Cyber Ape Yacht Club)" in legal disclosures. Both policy files become mandatory attachments per CEX-01.
 - Plan 02-05 ceremony prerequisites (human-only, must complete BEFORE 02-05): (a) 5 signers update Ledger firmware + Solana app + enable Blind signing; (b) each signer performs metal-plate seed read-back; (c) 5 signer pubkeys captured via encrypted channel; (d) Helius Business tier confirmed, ~20 tx of headroom; (e) proposer mainnet keypair generated + funded >=2 SOL; (f) each of 5 signer pubkeys funded >=0.5 SOL; (g) .env.mainnet populated; (h) pnpm squads:preflight-mainnet -> artifacts/mainnet-preflight.json overall=pass. Enumerated in docs/runbooks/mainnet-squads-ceremony-preflight.md Stages A-E.
-- Plan 02-05 Task 2 (mainnet Squads v4 multisig creation CEREMONY): script is written (88a03f4) and preflight artifact is passing (12/12, fresh). Ceremony is BLOCKED pending human-action checkpoint — requires all 5 voting signers + proposer operator synchronously present with Ledgers ready, and the typed phrase PROCEED WITH CAYC MAINNET CEREMONY. A continuation agent will drive the ceremony interactively once the user signals readiness. Do NOT mark GOV-02 complete or advance the plan counter until the ceremony artifact artifacts/mainnet.json is written and verify-vault confirms threshold=3 + members=6 on-chain.
+- **Plan 02-05 RESOLVED 2026-04-20 (commit 942c731).** Ceremony executed one-shot against Helius mainnet-beta; multisigCreateV2 confirmed slot 414500481. artifacts/mainnet.json written with full squads subobject (multisig 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR, vault CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR, tx Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs, human_confirmation_timestamp 2026-04-20T15:20:14.732Z, preflight_artifact_snapshot 12/12 pass). artifacts/mainnet-sessions/multisig-creation.md transcript 61 lines. .env.mainnet updated in-place (gitignored). verify-vault independently confirmed Threshold 3 of 6, 5 voting members mask=7 + 1 proposer mask=1, config authority all-zero (self-managed). GOV-02 closed. Phase 2 Success Criterion 2 verified. Phase 2 remaining: Plan 02-06 (publish signer roster, GOV-03).
+- **Phase 4 mint ceremony inheritance:** vault_pda CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR is the required authority for Phase 4 TOK-01..06 (mint/freeze/update/Permanent-Delegate). artifacts/mainnet.json squads subobject is frozen; Phase 4 appends sibling keys (mint, treasury_ata) via merge-on-write.
 
 ## Session Continuity
 
-Last session: 2026-04-20T15:07:08.284Z
-Stopped at: Plan 02-05 Task 1 complete (88a03f4: scripts/squads/create-mainnet.ts written, typechecked, lang-audit clean, guarded non-confirmation path aborts cleanly). Task 2 (checkpoint:human-action) blocked on 5 humans + 5 Ledgers present + typed-phrase confirmation. No mainnet tx fired.
+Last session: 2026-04-20T15:29:05.485Z
+Stopped at: Plan 02-05 COMPLETE. Mainnet Squads v4 multisig live at 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR / vault CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR (3-of-5 threshold, creation tx Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs slot 414500481). GOV-02 closed. Phase 2: 5/6 plans done; remaining 02-06 (artifact publication, GOV-03). Artifacts committed at 942c731; metadata commit pending.
 Resume file: None

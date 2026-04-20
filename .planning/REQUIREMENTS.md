@@ -21,7 +21,7 @@ Pre-launch policy artifacts that establish trust and unblock verification.
 Authority setup that MUST precede mint creation.
 
 - [x] **GOV-01**: Create Squads v4 multisig on devnet with devnet-only signers
-- [ ] **GOV-02**: Create Squads v4 multisig on mainnet with hardware-wallet signers (Ledger) BEFORE the mainnet mint is created
+- [x] **GOV-02**: Create Squads v4 multisig on mainnet with hardware-wallet signers (Ledger) BEFORE the mainnet mint is created
 - [ ] **GOV-03**: Document multisig address, signer pubkeys, threshold, and ceremony transcript as public repo artifacts
 - [ ] **GOV-04**: On mainnet, mint authority, freeze authority, and metadata update authority all point to the Squads vault PDA (never an EOA at any point)
 - [ ] **GOV-05**: Proactive outreach to Jupiter, Phantom, and RugCheck with the published authority policies before public listing submissions
@@ -142,7 +142,7 @@ Which phases cover which requirements. Populated by the roadmapper agent.
 | POL-03 | Phase 1 | Complete |
 | POL-04 | Phase 1 | Complete |
 | GOV-01 | Phase 2 | Complete |
-| GOV-02 | Phase 2 | Pending |
+| GOV-02 | Phase 2 | Complete |
 | GOV-03 | Phase 2 | Pending |
 | GOV-04 | Phase 2 | Pending |
 | GOV-05 | Phase 5 | Pending |
