@@ -22,7 +22,7 @@ import { Keypair, PublicKey } from '@solana/web3.js';
 import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { loadEnv } from '../../src/env/load.js';
+import { loadEnv, expandHome } from '../../src/env/load.js';
 import { buildConnection } from '../../src/squads/index.js';
 
 type Check = {
@@ -136,7 +136,7 @@ if (rpcOk) {
 }
 
 // ---- E4: Proposer keypair path configured + file exists + pubkey loadable ----
-const proposerPath = process.env.MAINNET_PROPOSER_KEYPAIR_PATH ?? '';
+const proposerPath = expandHome(process.env.MAINNET_PROPOSER_KEYPAIR_PATH ?? '');
 let proposerPubkey: PublicKey | null = null;
 if (proposerPath && existsSync(proposerPath)) {
   try {

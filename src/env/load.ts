@@ -1,7 +1,17 @@
 import { config } from 'dotenv';
 import { existsSync } from 'node:fs';
+import { homedir } from 'node:os';
 
 export type Network = 'devnet' | 'mainnet-beta';
+
+/**
+ * Expand a leading `~` in a path to the user's home directory.
+ * Node's `fs.existsSync` and similar do NOT expand `~` — it must be handled explicitly.
+ */
+export function expandHome(p: string): string {
+  if (!p || !p.startsWith('~')) return p;
+  return p.replace(/^~(?=$|[\/\\])/, homedir());
+}
 
 /**
  * Load the correct .env file for the given network.
