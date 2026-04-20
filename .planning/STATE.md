@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in-progress
-stopped_at: "Completed 01-03-PLAN.md (Mint Policy v1.0 + Clawback/Freeze Authority Policy v1.0 drafted). Phase 1 final plan ready: 01-04 (language audit + style guide)."
-last_updated: "2026-04-19T21:07:47Z"
-last_activity: 2026-04-19 — Plan 01-03 finalized (POL-02 Mint Policy + POL-03 Clawback/Freeze Authority Policy v1.0 drafts shipped; §15 copycat/OPS-07 acknowledgement inherits Plan 01-01 accept-conflict decision)
+status: phase-complete
+stopped_at: "Completed 01-04-PLAN.md (Style Guide v1.0 + language audit CI wired end-to-end; POL-04 closed). Phase 1 complete — all 4 of 4 POL requirements shipped."
+last_updated: "2026-04-19T21:57:39Z"
+last_activity: "2026-04-19 — Plan 01-04 finalized (docs/style-guide.md v1.0 + scripts/check-language.sh + .langauditrc.json + pre-commit integration). pnpm lang:audit exits 0 on current tree; smoke test confirms audit blocks deliberate violations. Phase 1 done."
 progress:
   total_phases: 7
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 4
-  completed_plans: 3
-  percent: 75
+  completed_plans: 4
+  percent: 100
 ---
 
 # Project State
@@ -25,34 +25,35 @@ See: .planning/PROJECT.md (updated 2026-04-19)
 
 ## Current Position
 
-Phase: 1 of 7 (Foundation — Policy, Legal, Dev Environment)
-Plan: 4 of 4 in current phase (next: 01-04 language audit + style guide; Phase 1 completion plan)
-Status: Plans 01-01 (symbol check / POL-01), 01-02 (repo scaffold), and 01-03 (Mint Policy POL-02 + Clawback/Freeze Authority Policy POL-03) complete; Plan 01-04 (language audit + POL-04 style guide) is the final Phase 1 plan
-Last activity: 2026-04-19 — Plan 01-03 finalized (two v1.0 public-policy drafts shipped: Mint Policy with 48-hour pre-announcement gate + Clawback/Freeze Policy with narrow lawful-order/theft-recovery scope, Freeze Transparency Log commitment, and §15 copycat/OPS-07 acknowledgement)
+Phase: 1 of 7 (Foundation — Policy, Legal, Dev Environment) — COMPLETE
+Plan: 4 of 4 in current phase — all Phase 1 plans shipped (next: Phase 2 — Squads Multisig Setup, GOV-01..04)
+Status: Phase 1 complete. Plans 01-01 (POL-01), 01-02 (repo scaffold), 01-03 (POL-02 + POL-03), and 01-04 (POL-04) all shipped. All four POL requirements closed. Phase 2 (GOV-01..04 Squads Multisig Setup) is unblocked pending planning.
+Last activity: 2026-04-19 — Plan 01-04 finalized (docs/style-guide.md v1.0 + scripts/check-language.sh + .langauditrc.json + .husky/pre-commit integration). Language audit is self-enforcing from this commit onward: any public-facing copy introducing banned terms outside the allowlist is blocked at pre-commit time.
 
-Progress: [████████░░] 75%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 13.5min
-- Total execution time: 27min
+- Total plans completed: 4
+- Average duration: 18.5min
+- Total execution time: 74min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-foundation | 2 | 27min | 13.5min |
+| 01-foundation | 4 | 74min | 18.5min |
 
 **Recent Trend:**
-- Last 5 plans: 01-foundation P02 (9min, 3 tasks, 22 files), 01-foundation P01 (18min, 2 tasks, 1 file)
-- Trend: —
+- Last 5 plans: 01-foundation P04 (40min, 2 tasks, 5 files), 01-foundation P03 (7min, 2 tasks, 3 files), 01-foundation P02 (9min, 3 tasks, 22 files), 01-foundation P01 (18min, 2 tasks, 1 file)
+- Trend: P04 took longer due to in-flight script debugging (LINENO reserved-variable bug, set -e interaction with pipelines, allowlist expansion needed to cover existing legitimate "stablecoin" uses)
 
 *Updated after each plan completion*
+| Phase 01-foundation P04 | 40min | 2 tasks | 5 files |
+| Phase 01-foundation P03 | 7min | 2 tasks | 3 files |
 | Phase 01-foundation P02 | 9min | 3 tasks | 22 files |
 | Phase 01-foundation P01 | 18min | 2 tasks | 1 file |
-| Phase 01-foundation P03 | 7min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,10 @@ Decisions are logged in PROJECT.md Key Decisions table. Locked constraints drivi
 - [Phase 01-foundation]: Clawback/Freeze Policy §15 explicitly names squatter mint 9JqkhuAU5P7Kyg3WxaTcuYT85AahyvXHr1duxakXpump and commits multisig operator to Phase 5 OPS-07 monitoring, canonical-address publication discipline, non-use of Freeze/PD against unrelated copycat mints, and ≤72h pre-ceremony symbol re-check before mainnet
 - [Phase 01-foundation]: Policies README uses descriptive link text ("Mint Policy", "Clawback & Freeze Authority Policy") not filename-as-link-text — satisfies plan key_links regex and reads more naturally
 - [Phase 01-foundation]: Amendment procedure for substantive policy changes requires 14-day public notice on all five canonical channels; editorial changes apply immediately but are logged in version history
+- [Phase 01-foundation]: POL-04 language audit wired end-to-end via `scripts/check-language.sh` + `.langauditrc.json` + `pnpm lang:audit` script + `.husky/pre-commit` Step 3 — any commit introducing "stablecoin"/"backed by"/"redeemable"/"1:1 with USDC"/"always worth $1" in public-facing copy (docs/ except docs/security and docs/style-guide.md, plus README.md) is blocked at pre-commit. Allowlist triple: (a) exclude_paths for files that ARE the rule document, (b) context-anchored allowlists for mint-policy §12 + clawback-freeze §14 + policies-README "What these policies do NOT cover", (c) 12 line-level regex allowlists covering Style-Guide §6 permitted references (negations, GENIUS-Act definitional terms, historical references to other projects like USDC/USDT/Terra-UST)
+- [Phase 01-foundation]: scripts/check-language.sh uses `set -uo pipefail` (not `-e`) because grep/read control-flow in subshell pipelines would abort the scan prematurely. Real errors are surfaced via explicit exit statements; rationale documented in script header
+- [Phase 01-foundation]: `LINENO` is a reserved bash variable — never use it as a loop iterator. Lesson learned in POL-04 script debugging; renamed to `LN` throughout scan loop. Future shell-script authors should prefer neutral names like LN/LINENUM
+- [Phase 01-foundation]: Pre-commit hook order locked as gitleaks → prettier → lang-audit → typecheck. Rationale: secrets first (hard security gate), formatting second (normalizes text), language third (text-content gate operating on normalized text), typecheck last (most expensive). Any future hook additions must respect this order
 
 ### Pending Todos
 
@@ -93,7 +98,9 @@ None yet.
 
 - **Phase 1 gate (POL-01): RESOLVED 2026-04-19 via accept-conflict.** CAYC symbol CONFLICT on Jupiter and Solscan (squatter mint `9JqkhuAU5P7Kyg3WxaTcuYT85AahyvXHr1duxakXpump`, "Clawed Ape Yacht Club", pump.fun Feb 2026); CoinGecko and CoinMarketCap clear. User elected to retain CAYC and disambiguate publicly. See `docs/symbol-availability-check.md`.
 - **Phase 1 gates (POL-02, POL-03): RESOLVED 2026-04-19 via Plan 01-03.** Mint Policy v1.0 draft at `docs/policies/mint-policy.md` (107 lines; 48-hour pre-announcement gate, multisig-discipline time-lock, 500M genesis, uncapped mint authority, GENIUS-Act disclaimer). Clawback/Freeze Authority Policy v1.0 draft at `docs/policies/clawback-freeze-policy.md` (152 lines; narrow lawful-order + theft-recovery scope, 7-step approval, 24/48/72h SLAs, Freeze Transparency Log, §15 copycat/OPS-07 acknowledgement). Phase 1 Success Criterion 1 content ready; publication deferred to Phase 5 Ops Go-Live.
-- **Plan 01-04 allowlist obligation (CRITICAL):** The POL-04 language audit MUST allowlist `docs/policies/mint-policy.md` §12 and `docs/policies/clawback-freeze-policy.md` §14 — these are the ONLY intentional "stablecoin" occurrences in the repo (Legal-posture disclaimers) and falsely flagging them would be a bug. Without the allowlist, the audit either false-positives on the disclaimers OR gets weakened repo-wide; the allowlist is the correct precision fix.
+- **Plan 01-04 allowlist obligation: RESOLVED 2026-04-19 via Plan 01-04.** POL-04 language audit is wired end-to-end. `docs/policies/mint-policy.md` §12 and `docs/policies/clawback-freeze-policy.md` §14 are correctly allowlisted via context-anchored section ranges in `.langauditrc.json` (`allowlisted_contexts`). A third context allowlist covers `docs/policies/README.md` "What these policies do NOT cover". `docs/style-guide.md` itself is in `exclude_paths` (the rule document cannot scan itself). 12 line-level regex allowlists cover Style-Guide §6 permitted references (negation + GENIUS-Act definitional term + historical reference to other projects). `pnpm lang:audit` exits 0 on current tree; smoke test confirms audit blocks deliberate violations.
+- **Phase 1 gate (POL-04): RESOLVED 2026-04-19 via Plan 01-04.** Language & Disclosure Style Guide v1.0 shipped at `docs/style-guide.md` (111 lines, 10 numbered sections + version history). Enforcement: `scripts/check-language.sh` + `.langauditrc.json` + `pnpm lang:audit` + `.husky/pre-commit` Step 3. Phase 1 Success Criterion 3 met. All four POL requirements (POL-01 through POL-04) closed.
+- **Phase 1 COMPLETE 2026-04-19.** All four Phase 1 plans shipped. All four POL requirements (POL-01 through POL-04) closed. Phase 2 (Squads Multisig Setup, GOV-01..04) is unblocked pending phase-plan generation.
 - **Phase 4 preflight obligation:** Re-run the full 4-platform symbol check <=72h before the mainnet ceremony to catch any newer squatters. Add to the ceremony checklist when Phase 4 is planned. Obligation now doubly-cited: Plan 01-01 decision trail AND Clawback/Freeze Policy §15.
 - **Phase 5 OPS-07 obligation:** Add mint `9JqkhuAU5P7Kyg3WxaTcuYT85AahyvXHr1duxakXpump` to the copycat watchlist with a documented anti-phishing response procedure. Now a published policy commitment (Clawback/Freeze Policy §15), not just an internal note.
 - **Phase 5 Freeze Transparency Log bootstrap obligation:** On the same day the Clawback/Freeze Policy takes effect on caycsolana.com, publish `docs/security/freeze-transparency-log.md` with Entry 0 (policy effective date marker). Schema specified in Clawback/Freeze Policy §8 — Phase 5 Ops Runbook must not improvise.
@@ -102,6 +109,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-19T21:07:47Z
-Stopped at: Completed 01-03-PLAN.md (Mint Policy v1.0 + Clawback/Freeze Authority Policy v1.0 + policies README shipped; POL-02 and POL-03 closed). Phase 1 final plan: 01-04 (language audit + POL-04 style guide).
+Last session: 2026-04-19T21:57:39Z
+Stopped at: Completed 01-04-PLAN.md (Style Guide v1.0 + language audit CI wired end-to-end; POL-04 closed). Phase 1 COMPLETE — all 4 of 4 POL requirements shipped. Phase 2 (Squads Multisig Setup, GOV-01..04) is next.
 Resume file: None

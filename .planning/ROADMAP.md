@@ -12,7 +12,7 @@ CAYC launches as a Solana Token-2022 branded payments token governed by a Squads
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation — Policy, Legal, Dev Environment** - Publish policy artifacts, confirm symbol availability, audit language, and scaffold the repo with pinned tooling before any on-chain code runs.
+- [x] **Phase 1: Foundation — Policy, Legal, Dev Environment** - Publish policy artifacts, confirm symbol availability, audit language, and scaffold the repo with pinned tooling before any on-chain code runs. **COMPLETE 2026-04-19** — all 4 plans shipped, all 4 POL requirements closed.
 - [ ] **Phase 2: Squads Multisig Setup (Devnet + Mainnet)** - Stand up Squads v4 multisigs with hardware-wallet signers on both networks so the vault PDA exists before any mint instruction.
 - [ ] **Phase 3: Devnet Full Rehearsal** - Execute the complete ceremony end-to-end on devnet twice (throwaway metadata, then real launch metadata) and exercise every token operation via the devnet multisig.
 - [ ] **Phase 4: Mainnet Launch Ceremony** - Execute the production mint ceremony in two separate Squads proposals (mint creation, then initial 500M supply) with full transcript artifacts.
@@ -149,7 +149,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation — Policy, Legal, Dev Environment | 3/4 | In Progress | - |
+| 1. Foundation — Policy, Legal, Dev Environment | 4/4 | Complete | 2026-04-19 |
 | 2. Squads Multisig Setup (Devnet + Mainnet) | 0/TBD | Not started | - |
 | 3. Devnet Full Rehearsal | 0/TBD | Not started | - |
 | 4. Mainnet Launch Ceremony | 0/TBD | Not started | - |
