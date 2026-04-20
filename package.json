@@ -22,6 +22,8 @@
     "squads:gen-devnet-signers": "tsx scripts/squads/generate-devnet-signers.ts",
     "squads:verify-vault": "tsx scripts/squads/verify-vault.ts",
     "squads:create-devnet": "tsx scripts/squads/create-devnet.ts",
+    "squads:rotate-devnet": "tsx scripts/squads/rotate-devnet-signer.ts",
+    "squads:smoke-mint": "tsx scripts/squads/smoke-test-mint.ts",
     "prepare": "husky"
   },
   "dependencies": {

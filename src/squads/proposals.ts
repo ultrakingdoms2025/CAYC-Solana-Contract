@@ -10,6 +10,25 @@ import { deriveVaultPda } from './pda.js';
 import { SQUADS_V4_PROGRAM_ID, PRIMARY_VAULT_INDEX } from './constants.js';
 
 /**
+ * Wait for a tx signature to reach `confirmed` commitment. The @sqds/multisig
+ * RPC helpers broadcast-and-return-immediately (they call `sendTransaction`
+ * without confirm), so any back-to-back call pattern needs explicit confirmation
+ * between steps — otherwise the next RPC's preflight reads a stale chain state
+ * and can fail with "InvalidTransactionIndex" and similar race-condition errors.
+ */
+async function confirmSignature(connection: Connection, signature: string): Promise<void> {
+  const latest = await connection.getLatestBlockhash('confirmed');
+  await connection.confirmTransaction(
+    {
+      signature,
+      blockhash: latest.blockhash,
+      lastValidBlockHeight: latest.lastValidBlockHeight,
+    },
+    'confirmed',
+  );
+}
+
+/**
  * Read the multisig account and return the next transactionIndex to use.
  * Callers MUST use this; re-using an existing index throws on-chain
  * ("account already in use").
@@ -64,6 +83,7 @@ export async function proposeVaultTransaction(args: {
     feePayer: args.proposer,
     programId: SQUADS_V4_PROGRAM_ID,
   });
+  await confirmSignature(args.connection, createTxSig);
 
   const proposalTxSig = await multisig.rpc.proposalCreate({
     connection: args.connection,
@@ -73,6 +93,7 @@ export async function proposeVaultTransaction(args: {
     feePayer: args.proposer,
     programId: SQUADS_V4_PROGRAM_ID,
   });
+  await confirmSignature(args.connection, proposalTxSig);
 
   return { transactionIndex, createTxSig, proposalTxSig };
 }
@@ -84,7 +105,7 @@ export async function approveProposal(args: {
   transactionIndex: bigint;
   member: Keypair;
 }): Promise<string> {
-  return multisig.rpc.proposalApprove({
+  const sig = await multisig.rpc.proposalApprove({
     connection: args.connection,
     multisigPda: args.multisigPda,
     transactionIndex: args.transactionIndex,
@@ -92,6 +113,8 @@ export async function approveProposal(args: {
     feePayer: args.member,
     programId: SQUADS_V4_PROGRAM_ID,
   });
+  await confirmSignature(args.connection, sig);
+  return sig;
 }
 
 /** Execute a vault transaction once threshold approvals have been collected. */
@@ -101,7 +124,7 @@ export async function executeVaultTransaction(args: {
   transactionIndex: bigint;
   executor: Keypair;
 }): Promise<string> {
-  return multisig.rpc.vaultTransactionExecute({
+  const sig = await multisig.rpc.vaultTransactionExecute({
     connection: args.connection,
     multisigPda: args.multisigPda,
     transactionIndex: args.transactionIndex,
@@ -109,6 +132,8 @@ export async function executeVaultTransaction(args: {
     feePayer: args.executor,
     programId: SQUADS_V4_PROGRAM_ID,
   });
+  await confirmSignature(args.connection, sig);
+  return sig;
 }
 
 /**
@@ -137,6 +162,7 @@ export async function proposeConfigTransaction(args: {
     memo: args.memo,
     programId: SQUADS_V4_PROGRAM_ID,
   });
+  await confirmSignature(args.connection, createTxSig);
 
   const proposalTxSig = await multisig.rpc.proposalCreate({
     connection: args.connection,
@@ -146,6 +172,7 @@ export async function proposeConfigTransaction(args: {
     feePayer: args.proposer,
     programId: SQUADS_V4_PROGRAM_ID,
   });
+  await confirmSignature(args.connection, proposalTxSig);
 
   return { transactionIndex, createTxSig, proposalTxSig };
 }
@@ -162,7 +189,7 @@ export async function executeConfigTransaction(args: {
   executor: Keypair;
   rentPayer?: Keypair;
 }): Promise<string> {
-  return multisig.rpc.configTransactionExecute({
+  const sig = await multisig.rpc.configTransactionExecute({
     connection: args.connection,
     multisigPda: args.multisigPda,
     transactionIndex: args.transactionIndex,
@@ -171,4 +198,6 @@ export async function executeConfigTransaction(args: {
     feePayer: args.executor,
     programId: SQUADS_V4_PROGRAM_ID,
   });
+  await confirmSignature(args.connection, sig);
+  return sig;
 }
