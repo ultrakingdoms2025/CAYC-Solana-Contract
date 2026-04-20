@@ -1,15 +1,81 @@
 {
-  "generated_at": "2026-04-20T05:21:06.876Z",
-  "commit_sha": "d53f5295d276d0c827eb61d1336c1fa5c7e100ac",
-  "overall": "fail",
-  "check_count": 1,
-  "pass_count": 0,
+  "generated_at": "2026-04-20T14:58:25.847Z",
+  "commit_sha": "7b8671f57185970fb142fdaf6d6cbd1bde2e8f12",
+  "overall": "pass",
+  "check_count": 12,
+  "pass_count": 12,
   "checks": [
     {
       "id": "E0",
       "description": ".env.mainnet exists",
-      "pass": false,
-      "detail": "copy .env.mainnet.example to .env.mainnet and fill values"
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "id": "E1",
+      "description": "CONFIRM_MAINNET=yes-mainnet-ceremony and env loaded",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "id": "E2",
+      "description": "HELIUS_MAINNET_RPC_URL set (not placeholder)",
+      "pass": true,
+      "detail": "endpoint: https://mainnet.helius-rpc.com/"
+    },
+    {
+      "id": "E3",
+      "description": "Mainnet RPC reachable",
+      "pass": true,
+      "detail": "slot=414497182"
+    },
+    {
+      "id": "E4",
+      "description": "Proposer keypair loadable",
+      "pass": true,
+      "detail": "pubkey=2gUjoCGqqoxQ9ivrTqGhHmtLqvFp3gvDRYCrMAwtkxA1"
+    },
+    {
+      "id": "E5",
+      "description": "Proposer balance >= 2 SOL",
+      "pass": true,
+      "detail": "2.0000 SOL"
+    },
+    {
+      "id": "E6",
+      "description": "Signer 1 balance >= 0.5 SOL (DwK4842jNasCGigQ1BruQxRFKpXevnBmPwuKLJVXBMuu)",
+      "pass": true,
+      "detail": "4.6371 SOL"
+    },
+    {
+      "id": "E7",
+      "description": "Signer 2 balance >= 0.5 SOL (G28iLXukQFExfZ21Gaq5M7CdqBFPmvkwwfRotxvU7ESq)",
+      "pass": true,
+      "detail": "3.9885 SOL"
+    },
+    {
+      "id": "E8",
+      "description": "Signer 3 balance >= 0.5 SOL (5BnDpWnRh8aZ3oFVBn54Z8mF2agnCcNJyTKS179fYU3b)",
+      "pass": true,
+      "detail": "0.5000 SOL"
+    },
+    {
+      "id": "E9",
+      "description": "Signer 4 balance >= 0.5 SOL (HBEqzqWmzvhQq3jAKBAdsE2DzoiGoKEy5A22d7jTMNPt)",
+      "pass": true,
+      "detail": "0.5000 SOL"
+    },
+    {
+      "id": "E10",
+      "description": "Signer 5 balance >= 0.5 SOL (KzCZnpmePppaQf9D9jcWnKPoiDTdznK7g4qKt73zD3n)",
+      "pass": true,
+      "detail": "14.6602 SOL"
+    },
+    {
+      "id": "E11",
+      "description": "Devnet smoke test (Plan 02-03) intact - PROOF OK + artifact execute_tx present",
+      "pass": true,
+      "detail": "execute_tx=3GCGNTTir7KMu8X5uS4JUdjkYTUTVNg19Bk6X8XLqhL3igzsbNNs5gW4siibZRKzbtLicGX7AyeLN2kLzXGemfEk"
     }
   ]
 }
