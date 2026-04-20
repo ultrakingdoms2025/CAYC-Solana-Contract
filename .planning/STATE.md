@@ -148,6 +148,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-20T17:36:05.439Z
-Stopped at: Plan 03-02 COMPLETE. verify-mint.ts shipped (runVerify + CLI), 6 unit tests green, Pitfall 11 guard present. Next: parallel plans 03-01 and 03-03 still in flight; Phase 3 Wave 2+ unblocked by verify-mint availability.
+Last session: 2026-04-20T17:32:29Z
+Stopped at: Plan 03-01 COMPLETE. src/config/token-config.ts SSOT shipped (9 tests, locked launch strings), assets/logo-{source,512,1024}.png generated (19/38KB derivatives under 100KB cap), assets/metadata/rehearsal-{1,2}.json with placeholder Arweave URIs. Two parallel-wave attribution collisions documented in 03-01-SUMMARY.md. Plan 03-02 also COMPLETE in the same wave. Plan 03-03 PAUSED at Task 2 checkpoint (Arweave fund vs GitHub-mirror-only). Phase 3 Wave 2 unblocked (03-04 + 03-05 can proceed after 03-03 resumes).
 Resume file: None
