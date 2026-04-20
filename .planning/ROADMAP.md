@@ -13,7 +13,7 @@ CAYC launches as a Solana Token-2022 branded payments token governed by a Squads
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation — Policy, Legal, Dev Environment** - Publish policy artifacts, confirm symbol availability, audit language, and scaffold the repo with pinned tooling before any on-chain code runs. **COMPLETE 2026-04-19** — all 4 plans shipped, all 4 POL requirements closed.
-- [ ] **Phase 2: Squads Multisig Setup (Devnet + Mainnet)** - Stand up Squads v4 multisigs with hardware-wallet signers on both networks so the vault PDA exists before any mint instruction.
+- [x] **Phase 2: Squads Multisig Setup (Devnet + Mainnet)** - Stand up Squads v4 multisigs with hardware-wallet signers on both networks so the vault PDA exists before any mint instruction. **COMPLETE 2026-04-20** — all 6 plans shipped; GOV-01, GOV-02, GOV-03 fully closed; GOV-04 devnet arm closed (Plan 02-03), mainnet arm deferred to Phase 4 DEP-04.
 - [ ] **Phase 3: Devnet Full Rehearsal** - Execute the complete ceremony end-to-end on devnet twice (throwaway metadata, then real launch metadata) and exercise every token operation via the devnet multisig.
 - [ ] **Phase 4: Mainnet Launch Ceremony** - Execute the production mint ceremony in two separate Squads proposals (mint creation, then initial 500M supply) with full transcript artifacts.
 - [ ] **Phase 5: DEX Liquidity, Early Verification & Ops Go-Live** - Seed locked CAYC/USDC liquidity on Raydium CPMM, submit Solscan + Jupiter Verify, conduct wallet/explorer outreach, and activate ongoing monitoring + runbooks.
@@ -59,7 +59,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 02-03-PLAN.md — Devnet rotation drill (add/remove signer) + multisig-signed smoke-test mint proving vault-PDA authority wiring (GOV-04 devnet arm)
 - [x] 02-04-PLAN.md — Mainnet ceremony preflight runbook + pseudonymous signer-roster template + automated preflight script (GOV-02, GOV-03 prereq)
 - [x] 02-05-PLAN.md — Mainnet Squads v4 multisig creation ceremony [HUMAN CHECKPOINT — 5 humans + hardware wallets required] (GOV-02)
-- [ ] 02-06-PLAN.md — Artifact publication: finalize signer-roster.md with pubkeys, validate artifacts/mainnet.json, cross-link ceremony transcript (GOV-03)
+- [x] 02-06-PLAN.md — Artifact publication: finalize signer-roster.md with pubkeys, validate artifacts/mainnet.json, cross-link ceremony transcript (GOV-03)
 
 **Canonical refs:**
 - `.planning/research/ARCHITECTURE.md` — System Overview, Pattern 2 (Script-Proposes/Multisig-Signs), Build Order table items 3-4

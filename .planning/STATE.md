@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: "Plan 02-05 COMPLETE. Mainnet Squads v4 multisig live at 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR / vault CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR (3-of-5 threshold, creation tx Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs slot 414500481). GOV-02 closed. Phase 2: 5/6 plans done; remaining 02-06 (artifact publication, GOV-03). Artifacts committed at 942c731; metadata commit pending."
-last_updated: "2026-04-20T15:29:05.489Z"
-last_activity: 2026-04-20 — Plan 02-05 COMPLETE (942c731 ceremony artifacts). Mainnet Squads v4 multisig live at 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR, vault PDA CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR, 3-of-5 threshold, creation tx confirmed slot 414500481. GOV-02 CLOSED. Phase 2 Success Criterion 2 verified. Remaining Phase 2 work: Plan 02-06 (artifact publication, GOV-03).
+stopped_at: Phase 2 COMPLETE (6/6 plans). Plan 02-06 closed GOV-03 via docs/security/signer-roster.md v1.1 (real pubkeys + pseudonyms) + scripts/squads/publish-artifacts.ts (idempotent artifact validator) + artifacts/mainnet.json ceremony_transcript cross-link. GOV-04 mainnet arm explicitly deferred to Phase 4 DEP-04. Phase 3 (Devnet Full Rehearsal) UNBLOCKED.
+last_updated: "2026-04-20T15:51:55.774Z"
+last_activity: "2026-04-20 — Plan 02-06 COMPLETE (artifact publication + signer-roster finalization, 9min wall clock). GOV-03 closed. Phase 2 at 6/6 plans complete. Phase 3 (Devnet Full Rehearsal) UNBLOCKED."
 progress:
   total_phases: 7
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 10
-  completed_plans: 9
-  percent: 90
+  completed_plans: 10
+  percent: 100
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-19)
 
 **Core value:** Users can send and receive CAYC as a trusted USDC-referenced payment token on Solana, backed by transparent multisig governance, published operational policies, and verification across the wallets, explorers, and exchanges people already use.
-**Current focus:** Phase 2 — Squads Multisig Setup (Devnet + Mainnet), GOV-01..04
+**Current focus:** Phase 3 — Devnet Full Rehearsal (Phase 2 COMPLETE 2026-04-20 with GOV-01, GOV-02, GOV-03 fully closed; GOV-04 devnet arm closed by Plan 02-03, mainnet arm deferred to Phase 4 DEP-04)
 
 ## Current Position
 
-Phase: 2 of 7 (Squads Multisig Setup — Devnet + Mainnet) — IN PROGRESS
-Plan: 5 of 6 in current phase COMPLETE (02-05 mainnet ceremony DONE; next: 02-06 artifact publication / GOV-03)
-Status: Plan 02-05 complete (942c731 ceremony artifacts, metadata commit pending). Mainnet Squads v4 multisig live at 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR with vault PDA CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR (byte-level distinct from multisig — Pitfall 11 clean). Threshold 3-of-5, 5 voting members (Permissions.all, mask=7) + 1 proposer-only member (Permission.Initiate, mask=1). Creation tx Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs confirmed slot 414500481. verify-vault independently confirmed threshold=3, members=6, self-managed config authority (all-zero). Preflight 12/12 pass embedded in artifact as permanent audit trail. GOV-02 CLOSED. Phase 2 Success Criterion 2 verified. .env.mainnet updated in-place (gitignored) with MAINNET_SQUADS_MULTISIG_ADDRESS and MAINNET_SQUADS_VAULT_PDA — Phase 4 mint ceremony inherits vault_pda as sole authority.
-Last activity: 2026-04-20 — Plan 02-05 COMPLETE (mainnet ceremony executed, one-shot success, 5min wall clock). Remaining Phase 2 work: Plan 02-06 (publish finalized docs/security/signer-roster.md with pubkeys from ceremony transcript, validate artifacts/mainnet.json, close GOV-03).
+Phase: 2 of 7 (Squads Multisig Setup — Devnet + Mainnet) — COMPLETE
+Plan: 6 of 6 in current phase COMPLETE (02-06 artifact publication DONE; next phase: Phase 3 Devnet Full Rehearsal)
+Status: Phase 2 COMPLETE 2026-04-20. Plan 02-06 closed GOV-03 via docs/security/signer-roster.md v1.1 (commit b89c19d) — all 5 voting-member pubkeys (DwK4842..., G28iLXu..., 5BnDpWn..., HBEqzqW..., KzCZnpm...) + proposer pubkey (2gUjoCG...) populated from artifacts/mainnet.json with role-indexed pseudonyms (cayc-alpha..epsilon + cayc-proposer). No real names. scripts/squads/publish-artifacts.ts (commit 02fc972) is an idempotent artifact-internal-consistency validator: pubkey format, threshold=3, voting_member_count=5, program_id matches SQUADS_V4_PROGRAM_ID, Pitfall 11 clean, creation_tx_signature base58, vault-PDA re-derivation pure-math match. Explicitly documented as NOT an on-chain authority check — GOV-04 mainnet arm remains Phase 4 DEP-04's responsibility (no mainnet mint exists in Phase 2). artifacts/mainnet.json now embeds squads.ceremony_transcript='artifacts/mainnet-sessions/multisig-creation.md'. Phase 2 requirements state: GOV-01 (Plan 02-02), GOV-02 (Plan 02-05), GOV-03 (THIS plan) FULLY CLOSED; GOV-04 PARTIAL (devnet arm closed by Plan 02-03; mainnet arm deferred to Phase 4 DEP-04). Phase 2 Success Criterion 3 MET. Phase 3 (Devnet Full Rehearsal) UNBLOCKED.
+Last activity: 2026-04-20 — Plan 02-06 COMPLETE (artifact publication + signer-roster finalization, 9min wall clock). GOV-03 closed. Phase 2 at 6/6 plans. Next phase: Phase 3 Devnet Full Rehearsal.
 
-Progress: [█████████░] 90%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -59,6 +59,7 @@ Progress: [█████████░] 90%
 | Phase 02-squads-multisig-setup-devnet-mainnet P03 | 14min | 3 tasks | 11 files |
 | Phase 02-squads-multisig-setup-devnet-mainnet P04 | 7min | 2 tasks | 5 files |
 | Phase 02-squads-multisig-setup-devnet-mainnet P05 | 5min | 2 tasks | 3 files |
+| Phase 02-squads-multisig-setup-devnet-mainnet P06 | 9min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -111,6 +112,7 @@ Decisions are logged in PROJECT.md Key Decisions table. Locked constraints drivi
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Grep-verifiable tradeoff acknowledgement pattern: when a plan overrides a ROADMAP success criterion, acceptance criteria grep for exact literal tokens in committed docs. For the all-Ledger-vs-vendor-diversity override: tokens 'vendor diversity', 'all-Ledger', 'accepted tradeoff' must appear in docs/runbooks/mainnet-squads-ceremony-preflight.md Stage A3 AND docs/security/signer-roster.md §Vendor diversity. Silent edit removing the acknowledgement fails CI.
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] docs/security/ pseudonymous roster pattern: docs/security/signer-roster.md committed with 5 voting + 1 proposer slots; pubkeys left as literal placeholder strings (_filled in Plan 02-06 from mainnet ceremony transcript_) so reviewers see which slots are pending. docs/security/ is excluded from pnpm lang:audit per docs/style-guide.md §8 but still avoids banned terms. Identity-marker grep (real name|given name|surname|first name|last name) must return empty — enforces pseudonymous commitment.
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: Plan 02-05 mainnet ceremony EXECUTED 2026-04-20T15:20:16.898Z. Multisig 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR / Vault PDA CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR / 3-of-5 threshold / tx Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs slot 414500481. Preflight 12/12 pass (22min before ceremony). Pitfall 11 clean (byte-level multisig != vault). verify-vault confirmed Threshold 3 of 6 on-chain (5 voting mask=7 + 1 proposer mask=1). GOV-02 CLOSED. Phase 2 Success Criterion 2 verified. Phase 4 mint ceremony inherits vault_pda as mint/freeze/update/Permanent-Delegate authority.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: Plan 02-06 COMPLETE — docs/security/signer-roster.md v1.1 finalized with 5 voting + 1 proposer pubkeys from artifacts/mainnet.json, pseudonyms cayc-alpha..epsilon + cayc-proposer. scripts/squads/publish-artifacts.ts is idempotent artifact-consistency validator (NOT on-chain check). GOV-03 CLOSED. GOV-04 mainnet arm explicitly DEFERRED to Phase 4 DEP-04 (no mainnet mint exists in Phase 2). Phase 2 now 6/6 plans complete.
 
 ### Pending Todos
 
@@ -133,9 +135,11 @@ None yet.
 - Plan 02-05 ceremony prerequisites (human-only, must complete BEFORE 02-05): (a) 5 signers update Ledger firmware + Solana app + enable Blind signing; (b) each signer performs metal-plate seed read-back; (c) 5 signer pubkeys captured via encrypted channel; (d) Helius Business tier confirmed, ~20 tx of headroom; (e) proposer mainnet keypair generated + funded >=2 SOL; (f) each of 5 signer pubkeys funded >=0.5 SOL; (g) .env.mainnet populated; (h) pnpm squads:preflight-mainnet -> artifacts/mainnet-preflight.json overall=pass. Enumerated in docs/runbooks/mainnet-squads-ceremony-preflight.md Stages A-E.
 - **Plan 02-05 RESOLVED 2026-04-20 (commit 942c731).** Ceremony executed one-shot against Helius mainnet-beta; multisigCreateV2 confirmed slot 414500481. artifacts/mainnet.json written with full squads subobject (multisig 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR, vault CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR, tx Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs, human_confirmation_timestamp 2026-04-20T15:20:14.732Z, preflight_artifact_snapshot 12/12 pass). artifacts/mainnet-sessions/multisig-creation.md transcript 61 lines. .env.mainnet updated in-place (gitignored). verify-vault independently confirmed Threshold 3 of 6, 5 voting members mask=7 + 1 proposer mask=1, config authority all-zero (self-managed). GOV-02 closed. Phase 2 Success Criterion 2 verified. Phase 2 remaining: Plan 02-06 (publish signer roster, GOV-03).
 - **Phase 4 mint ceremony inheritance:** vault_pda CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR is the required authority for Phase 4 TOK-01..06 (mint/freeze/update/Permanent-Delegate). artifacts/mainnet.json squads subobject is frozen; Phase 4 appends sibling keys (mint, treasury_ata) via merge-on-write.
+- **Plan 02-06 RESOLVED 2026-04-20 (commits 02fc972 + b89c19d).** docs/security/signer-roster.md v1.1 finalized: 5 voting-member pubkeys + 1 proposer pubkey from artifacts/mainnet.json, role-indexed pseudonyms (cayc-alpha..epsilon + cayc-proposer), no real names, vendor-diversity ACCEPTED TRADEOFF preserved, bidirectional cross-links to artifacts/mainnet.json + artifacts/mainnet-sessions/multisig-creation.md, "Note on GOV-04" explicit scope-boundary preserving Phase 4 DEP-04 responsibility. scripts/squads/publish-artifacts.ts idempotent validator: schema check (pubkey format, threshold=3, voting_member_count=5, program_id, no duplicates, proposer not in voting set, Pitfall 11 clean, creation_tx_signature base58) + pure-math vault-PDA re-derivation match via deriveVaultPda/verifyVaultAuthority. Script documents scope ("NOT an on-chain authority check"). artifacts/mainnet.json squads.ceremony_transcript cross-link added; idempotence proven (second run = "already consistent"). GOV-03 CLOSED. Phase 2 Success Criterion 3 MET. Phase 2 at 6/6 plans complete.
+- **GOV-04 mainnet arm CARRIED FORWARD to Phase 4 DEP-04.** GOV-04 requires an on-chain check that the production mint's mint/freeze/metadata-update authorities all equal the Squads vault PDA (CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR). No mainnet mint exists in Phase 2 — therefore GOV-04 cannot be closed here. Devnet arm was closed by Plan 02-03 (smoke-test mint on J516PvBz...). Phase 4 DEP-04 plan MUST fetch the production mint account and assert each authority equals vault_pda via verifyVaultAuthority from src/squads/verify.ts. Do NOT mark GOV-04 complete until Phase 4 DEP-04 lands.
 
 ## Session Continuity
 
-Last session: 2026-04-20T15:29:05.485Z
-Stopped at: Plan 02-05 COMPLETE. Mainnet Squads v4 multisig live at 46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR / vault CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR (3-of-5 threshold, creation tx Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs slot 414500481). GOV-02 closed. Phase 2: 5/6 plans done; remaining 02-06 (artifact publication, GOV-03). Artifacts committed at 942c731; metadata commit pending.
+Last session: 2026-04-20T15:50:16.620Z
+Stopped at: Phase 2 COMPLETE (6/6 plans). Plan 02-06 closed GOV-03 via docs/security/signer-roster.md v1.1 (real pubkeys + pseudonyms) + scripts/squads/publish-artifacts.ts (idempotent artifact validator) + artifacts/mainnet.json ceremony_transcript cross-link. GOV-04 mainnet arm explicitly deferred to Phase 4 DEP-04. Phase 3 (Devnet Full Rehearsal) UNBLOCKED.
 Resume file: None
