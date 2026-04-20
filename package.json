@@ -19,6 +19,8 @@
     "lang:audit:staged": "bash scripts/check-language.sh --staged",
     "test": "vitest run",
     "test:watch": "vitest",
+    "squads:gen-devnet-signers": "tsx scripts/squads/generate-devnet-signers.ts",
+    "squads:verify-vault": "tsx scripts/squads/verify-vault.ts",
     "prepare": "husky"
   },
   "dependencies": {
