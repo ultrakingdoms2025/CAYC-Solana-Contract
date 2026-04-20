@@ -27,7 +27,9 @@
     "squads:preflight-mainnet": "tsx scripts/squads/preflight-mainnet.ts",
     "squads:create-mainnet": "tsx scripts/squads/create-mainnet.ts",
     "squads:publish-artifacts": "tsx scripts/squads/publish-artifacts.ts",
+    "assets:resize-logo": "tsx scripts/assets/resize-logo.ts",
     "assets:upload-metadata": "tsx scripts/assets/upload-metadata.ts",
+    "deploy:verify-mint": "tsx scripts/deploy/verify-mint.ts",
     "prepare": "husky"
   },
   "dependencies": {
@@ -47,6 +49,7 @@
     "@types/node": "^20.19.0",
     "husky": "^9.1.7",
     "prettier": "^3.3.3",
+    "sharp": "^0.33",
     "solana-bankrun": "^0.4.0",
     "tsx": "^4.21.0",
     "typescript": "~5.6.0",
