@@ -1,0 +1,133 @@
+{
+  "$schema": "https://cayc-solana-contract/.langauditrc.schema.json",
+  "version": "1.0",
+  "description": "Language audit configuration for CAYC public-facing copy. See docs/style-guide.md for the rules this enforces.",
+  "scan_paths": ["docs", "README.md"],
+  "exclude_paths": ["docs/security", "docs/style-guide.md", ".planning"],
+  "banned_terms": [
+    {
+      "id": "stablecoin-word",
+      "pattern": "stablecoin",
+      "case_insensitive": true,
+      "severity": "error",
+      "message": "Public copy must not describe CAYC as a stablecoin. See docs/style-guide.md Section 2 for approved replacement terms."
+    },
+    {
+      "id": "stablecoin-hyphenated",
+      "pattern": "stable[- ]coin",
+      "case_insensitive": true,
+      "severity": "error",
+      "message": "Variants of 'stablecoin' (hyphenated or space-separated) are also banned. See docs/style-guide.md Section 2."
+    },
+    {
+      "id": "backed-by",
+      "pattern": "backed by",
+      "case_insensitive": true,
+      "severity": "error",
+      "message": "CAYC is not backed by anything. Do not use 'backed by' in public copy. See docs/style-guide.md Section 2."
+    },
+    {
+      "id": "redeemable",
+      "pattern": "redeemable",
+      "case_insensitive": true,
+      "severity": "error",
+      "message": "CAYC has no redemption mechanism. Do not use 'redeemable' in public copy. See docs/style-guide.md Section 2."
+    },
+    {
+      "id": "one-to-one-usdc",
+      "pattern": "1:1 with USDC",
+      "case_insensitive": true,
+      "severity": "error",
+      "message": "'1:1 with USDC' implies backing. Use 'USDC-referenced' or describe the decimal match explicitly. See docs/style-guide.md Section 2."
+    },
+    {
+      "id": "always-worth-dollar",
+      "pattern": "always worth \\$1",
+      "case_insensitive": true,
+      "severity": "error",
+      "message": "Claims of a fixed dollar value are factually wrong and legally exposed. See docs/style-guide.md Section 2."
+    }
+  ],
+  "allowlisted_contexts": [
+    {
+      "id": "mint-policy-legal-posture",
+      "file": "docs/policies/mint-policy.md",
+      "section_anchor": "## 12. Legal posture",
+      "rationale": "The Legal posture section explicitly disclaims stablecoin status and must retain the word 'stablecoin' to do so."
+    },
+    {
+      "id": "clawback-freeze-legal-posture",
+      "file": "docs/policies/clawback-freeze-policy.md",
+      "section_anchor": "## 14. Legal posture",
+      "rationale": "The Legal posture section explicitly disclaims stablecoin status and must retain the word 'stablecoin' to do so."
+    },
+    {
+      "id": "policy-readme-scope-para",
+      "file": "docs/policies/README.md",
+      "section_anchor": "## What these policies do NOT cover",
+      "rationale": "This section describes CAYC's peg mechanism by saying there is NO peg contract; the negation of stablecoin status is the point of the paragraph."
+    }
+  ],
+  "allowlisted_lines": [
+    {
+      "pattern": "NOT a stablecoin",
+      "rationale": "Explicit negation is always permitted."
+    },
+    {
+      "pattern": "not a stablecoin",
+      "rationale": "Explicit negation is always permitted (case variant of above)."
+    },
+    {
+      "pattern": "not[*]{0,2} a [a-z-]+ stablecoin",
+      "rationale": "Explicit negation with qualifier word (e.g., 'not a regulated stablecoin', 'not a payment stablecoin', 'not a reserve-backed stablecoin'). The [*]{0,2} allows markdown bold formatting ('**not**' → 'not**' + ' a ...')."
+    },
+    {
+      "pattern": "not[*]{0,2} redeemable",
+      "rationale": "Explicit negation of redemption (e.g., 'is not redeemable at par'). CAYC explicitly disclaims redeemability."
+    },
+    {
+      "pattern": "no redemption",
+      "rationale": "Explicit statement that there is no redemption mechanism (e.g., 'has no redemption right', 'there is no redemption mechanism')."
+    },
+    {
+      "pattern": "payment stablecoin",
+      "rationale": "Style Guide Section 6 case 3: 'payment stablecoin' is the specific GENIUS-Act definitional term. Permitted when referring to the regulated category (always as negation or reference)."
+    },
+    {
+      "pattern": "algorithmic stablecoin",
+      "rationale": "Style Guide Section 6 case 3: 'algorithmic stablecoin' is a reference to the historical category of algorithmic pegs (Terra/UST, USR). Permitted as reference to other projects."
+    },
+    {
+      "pattern": "stablecoin[- ]compliance",
+      "rationale": "Reference to the 'stablecoin-compliance checklist' regulated-category concept, not a description of CAYC."
+    },
+    {
+      "pattern": "regulated-stablecoin",
+      "rationale": "Hyphenated adjective form 'regulated-stablecoin classification' denotes the regulated category itself, not a description of CAYC."
+    },
+    {
+      "pattern": "Stablecoin. issuer",
+      "rationale": "'Stablecoin Issuer' (e.g., 'Permitted Payment Stablecoin Issuer') is a statutory role under the GENIUS Act, referenced in negations."
+    },
+    {
+      "pattern": "never .stablecoin",
+      "rationale": "Explicit negation (e.g., 'never a stablecoin', 'never use stablecoin')."
+    },
+    {
+      "pattern": "deliberately NOT",
+      "rationale": "Explicit negation pattern used in repo README disclaimer."
+    },
+    {
+      "pattern": "regulated stablecoin",
+      "rationale": "Style Guide Section 6 case 3: 'regulated stablecoin' is the technical/legal category CAYC is explicitly NOT. Permitted when referring to the regulated category itself (GENIUS-Act/MiCA term) or to other projects (USDC/USDT) that ARE regulated stablecoins."
+    },
+    {
+      "pattern": "does NOT make CAYC a regulated",
+      "rationale": "Explicit negation pattern used in Clawback/Freeze Policy Section 14."
+    },
+    {
+      "pattern": "comparable to regulated",
+      "rationale": "Style Guide Section 6 case 3: reference to regulated stablecoins as the comparison class (USDC/USDT), not as a description of CAYC."
+    }
+  ]
+}

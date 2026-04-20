@@ -3,7 +3,8 @@
 # CAYC pre-commit hook.
 # 1. Run gitleaks on staged changes (blocks commit if secrets found).
 # 2. Run prettier --check on staged .ts/.md/.json files (non-blocking nudge).
-# 3. Run tsc --noEmit (blocks commit if TypeScript fails to compile).
+# 3. Run language audit on staged files (blocks commit on banned terms per docs/style-guide.md).
+# 4. Run tsc --noEmit (blocks commit if TypeScript fails to compile).
 
 set -e
 
@@ -33,7 +34,16 @@ if [ -n "$STAGED_TS_JSON" ]; then
   }
 fi
 
-# --- Step 3: typecheck (BLOCKING; skipped if no .ts changes staged, as tsc on empty tree is wasted work) ---
+# --- Step 3: Language audit (BLOCKING) ---
+if [ -f scripts/check-language.sh ]; then
+  echo "[pre-commit] Running language audit on staged files..."
+  bash scripts/check-language.sh --staged || {
+    echo "ERROR: Language audit failed. See output above and docs/style-guide.md."
+    exit 1
+  }
+fi
+
+# --- Step 4: typecheck (BLOCKING; skipped if no .ts changes staged, as tsc on empty tree is wasted work) ---
 STAGED_TS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.ts$' || true)
 if [ -n "$STAGED_TS" ]; then
   echo "[pre-commit] Running tsc --noEmit..."

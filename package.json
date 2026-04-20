@@ -15,7 +15,8 @@
     "format:check": "prettier --check \"**/*.{ts,js,json,md}\"",
     "gitleaks": "gitleaks detect --config .gitleaks.toml --redact --verbose",
     "gitleaks:staged": "gitleaks protect --staged --config .gitleaks.toml --redact --verbose",
-    "lang:audit": "echo 'lang:audit wired up in Plan 04'",
+    "lang:audit": "bash scripts/check-language.sh",
+    "lang:audit:staged": "bash scripts/check-language.sh --staged",
     "prepare": "husky"
   },
   "dependencies": {
