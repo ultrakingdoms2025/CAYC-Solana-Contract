@@ -54,7 +54,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The mainnet multisig address, vault PDA, signer pubkeys, threshold, and ceremony transcript are committed as public repo artifacts in `artifacts/mainnet.json` and `docs/security/signer-roster.md` (role + pseudonym only, no real names).
   4. A byte-level plan exists for mainnet mint creation that uses the Squads **vault PDA** (not the multisig config account) as mint/freeze/update authority AND Permanent Delegate — verified by a successful multisig-signed mint transaction on devnet.
 **Plans**: 6 plans
-- [ ] 02-01-PLAN.md — Squads v4 helper module (src/squads/) + devnet signer-generator + vault verifier (substrate for all GOV requirements)
+- [x] 02-01-PLAN.md — Squads v4 helper module (src/squads/) + devnet signer-generator + vault verifier (substrate for all GOV requirements)
 - [ ] 02-02-PLAN.md — Devnet Squads v4 multisig creation via SDK + vault PDA derivation + artifacts/devnet.json (GOV-01)
 - [ ] 02-03-PLAN.md — Devnet rotation drill (add/remove signer) + multisig-signed smoke-test mint proving vault-PDA authority wiring (GOV-04 devnet arm)
 - [ ] 02-04-PLAN.md — Mainnet ceremony preflight runbook + pseudonymous signer-roster template + automated preflight script (GOV-02, GOV-03 prereq)
@@ -156,7 +156,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation — Policy, Legal, Dev Environment | 4/4 | Complete | 2026-04-19 |
-| 2. Squads Multisig Setup (Devnet + Mainnet) | 0/6 | Not started | - |
+| 2. Squads Multisig Setup (Devnet + Mainnet) | 1/6 | In Progress | - |
 | 3. Devnet Full Rehearsal | 0/TBD | Not started | - |
 | 4. Mainnet Launch Ceremony | 0/TBD | Not started | - |
 | 5. DEX Liquidity, Early Verification & Ops Go-Live | 0/TBD | Not started | - |

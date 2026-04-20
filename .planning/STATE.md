@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-04-PLAN.md (Style Guide v1.0 + language audit CI wired end-to-end; POL-04 closed). Phase 1 COMPLETE — all 4 of 4 POL requirements shipped. Phase 2 (Squads Multisig Setup, GOV-01..04) is next.
-last_updated: "2026-04-20T02:11:41.883Z"
+stopped_at: Completed 02-01-PLAN.md (src/squads helper module + src/env/load.ts + scripts/squads generator+verifier; 8 vitest tests passing; gitleaks PATH gate closed session-wide). Plan 02-02 (devnet multisig creation via SDK) is next — imports from src/squads are ready.
+last_updated: "2026-04-20T04:25:46.986Z"
 last_activity: "2026-04-19 — Plan 01-04 finalized (docs/style-guide.md v1.0 + scripts/check-language.sh + .langauditrc.json + .husky/pre-commit integration). Language audit is self-enforcing from this commit onward: any public-facing copy introducing banned terms outside the allowlist is blocked at pre-commit time."
 progress:
   total_phases: 7
   completed_phases: 1
-  total_plans: 4
-  completed_plans: 4
+  total_plans: 10
+  completed_plans: 5
   percent: 100
 ---
 
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-19)
 
 **Core value:** Users can send and receive CAYC as a trusted USDC-referenced payment token on Solana, backed by transparent multisig governance, published operational policies, and verification across the wallets, explorers, and exchanges people already use.
-**Current focus:** Phase 1 — Foundation (Policy, Legal, Dev Environment)
+**Current focus:** Phase 2 — Squads Multisig Setup (Devnet + Mainnet), GOV-01..04
 
 ## Current Position
 
-Phase: 1 of 7 (Foundation — Policy, Legal, Dev Environment) — COMPLETE
-Plan: 4 of 4 in current phase — all Phase 1 plans shipped (next: Phase 2 — Squads Multisig Setup, GOV-01..04)
-Status: Phase 1 complete. Plans 01-01 (POL-01), 01-02 (repo scaffold), 01-03 (POL-02 + POL-03), and 01-04 (POL-04) all shipped. All four POL requirements closed. Phase 2 (GOV-01..04 Squads Multisig Setup) is unblocked pending planning.
-Last activity: 2026-04-19 — Plan 01-04 finalized (docs/style-guide.md v1.0 + scripts/check-language.sh + .langauditrc.json + .husky/pre-commit integration). Language audit is self-enforcing from this commit onward: any public-facing copy introducing banned terms outside the allowlist is blocked at pre-commit time.
+Phase: 2 of 7 (Squads Multisig Setup — Devnet + Mainnet) — IN PROGRESS
+Plan: 1 of 6 in current phase COMPLETE (02-01 src/squads helper substrate shipped; next: 02-02 devnet multisig creation via SDK)
+Status: Plan 02-01 complete. src/squads helper module exposes deriveMultisigPda, deriveVaultPda, buildVotingMembers, buildProposerMember, verifyVaultAuthority, VaultMismatchError, buildConnection, loadMultisig, SQUADS_V4_PROGRAM_ID, MAINNET_THRESHOLD=3, MAINNET_SIGNER_COUNT=5. src/env/load.ts enforces CONFIRM_MAINNET=yes-mainnet-ceremony guard. scripts/squads/{generate-devnet-signers,verify-vault}.ts + README.md committed. 8 vitest tests passing. Pitfall 11 mechanized. gitleaks PATH gate closed session-wide.
+Last activity: 2026-04-20 — Plan 02-01 complete (e63a564 + a888b1c); GOV-01 and GOV-04 substrate built (requirements remain pending — close in 02-02 and 02-05 respectively).
 
-Progress: [██████████] 100%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
@@ -54,6 +54,7 @@ Progress: [██████████] 100%
 | Phase 01-foundation P03 | 7min | 2 tasks | 3 files |
 | Phase 01-foundation P02 | 9min | 3 tasks | 22 files |
 | Phase 01-foundation P01 | 18min | 2 tasks | 1 file |
+| Phase 02-squads-multisig-setup-devnet-mainnet P01 | 7min | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -89,6 +90,10 @@ Decisions are logged in PROJECT.md Key Decisions table. Locked constraints drivi
 - [Phase 01-foundation]: scripts/check-language.sh uses `set -uo pipefail` (not `-e`) because grep/read control-flow in subshell pipelines would abort the scan prematurely. Real errors are surfaced via explicit exit statements; rationale documented in script header
 - [Phase 01-foundation]: `LINENO` is a reserved bash variable — never use it as a loop iterator. Lesson learned in POL-04 script debugging; renamed to `LN` throughout scan loop. Future shell-script authors should prefer neutral names like LN/LINENUM
 - [Phase 01-foundation]: Pre-commit hook order locked as gitleaks → prettier → lang-audit → typecheck. Rationale: secrets first (hard security gate), formatting second (normalizes text), language third (text-content gate operating on normalized text), typecheck last (most expensive). Any future hook additions must respect this order
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Squads helper API access: Permission/Permissions/Member types come from @sqds/multisig types namespace (multisig.types.Permission, types.Permissions, types.Member) — not top-level exports. Plan interface docs showed top-level, but runtime exposes only via types.*. src/squads/members.ts and tests use types.* form.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Pitfall 11 mechanized via src/squads: deriveVaultPda() is the ONLY vault-derivation path; VaultMismatchError throws with both addresses + PITFALLS.md reference; verifyVaultAuthority() must be called before any authority-set transaction. Downstream scripts import from src/squads, never @sqds/multisig PDA helpers directly.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Mainnet config authority convention: Squads v4 Multisig.configAuthority is a PublicKey (not nullable); the 'self-managed / null' semantic is configAuthority.equals(PublicKey.default) (all-zero bytes). verify-vault.ts prints the pubkey with an (all-zero → self-managed) suffix when this case matches.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Session gitleaks PATH recipe (from Plan 02-01 onward): export PATH="/c/Users/markc/AppData/Local/Microsoft/WinGet/Packages/Gitleaks.Gitleaks_Microsoft.Winget.Source_8wekyb3d8bbwe:$PATH" — must be re-applied in any new shell session for the rest of Phase 2. Each continuation-agent plan re-applies before first git commit or pnpm gitleaks.
 
 ### Pending Todos
 
@@ -101,6 +106,8 @@ None yet.
 - **Plan 01-04 allowlist obligation: RESOLVED 2026-04-19 via Plan 01-04.** POL-04 language audit is wired end-to-end. `docs/policies/mint-policy.md` §12 and `docs/policies/clawback-freeze-policy.md` §14 are correctly allowlisted via context-anchored section ranges in `.langauditrc.json` (`allowlisted_contexts`). A third context allowlist covers `docs/policies/README.md` "What these policies do NOT cover". `docs/style-guide.md` itself is in `exclude_paths` (the rule document cannot scan itself). 12 line-level regex allowlists cover Style-Guide §6 permitted references (negation + GENIUS-Act definitional term + historical reference to other projects). `pnpm lang:audit` exits 0 on current tree; smoke test confirms audit blocks deliberate violations.
 - **Phase 1 gate (POL-04): RESOLVED 2026-04-19 via Plan 01-04.** Language & Disclosure Style Guide v1.0 shipped at `docs/style-guide.md` (111 lines, 10 numbered sections + version history). Enforcement: `scripts/check-language.sh` + `.langauditrc.json` + `pnpm lang:audit` + `.husky/pre-commit` Step 3. Phase 1 Success Criterion 3 met. All four POL requirements (POL-01 through POL-04) closed.
 - **Phase 1 COMPLETE 2026-04-19.** All four Phase 1 plans shipped. All four POL requirements (POL-01 through POL-04) closed. Phase 2 (Squads Multisig Setup, GOV-01..04) is unblocked pending phase-plan generation.
+- **Phase 2 session PATH obligation (every shell restart):** gitleaks is installed via winget under `%LOCALAPPDATA%\Microsoft\WinGet\Packages\Gitleaks.Gitleaks_Microsoft.Winget.Source_8wekyb3d8bbwe\` but that directory is NOT on default bash PATH on this machine. Any new Phase 2 executor shell must first run: `export PATH="/c/Users/markc/AppData/Local/Microsoft/WinGet/Packages/Gitleaks.Gitleaks_Microsoft.Winget.Source_8wekyb3d8bbwe:$PATH"` then `which gitleaks` (must print the full path). Without this, every `pnpm gitleaks` acceptance gate and every husky pre-commit hook fails. Plans 02-02 through 02-06 each `read_first` 02-01-SUMMARY.md so the recipe is trivially re-discoverable.
+- **Phase 2 Plan 02-01 SHIPPED 2026-04-20.** src/squads helper substrate in place (8 vitest tests passing, Pitfall 11 mechanized, gitleaks PATH gate closed). GOV-01 and GOV-04 requirements remain [ ] pending — close in Plans 02-02 (devnet multisig creation) and 02-05 (mainnet ceremony) respectively. Downstream Phase 2 plans import from src/squads; no plan should call @sqds/multisig PDA helpers directly.
 - **Phase 4 preflight obligation:** Re-run the full 4-platform symbol check <=72h before the mainnet ceremony to catch any newer squatters. Add to the ceremony checklist when Phase 4 is planned. Obligation now doubly-cited: Plan 01-01 decision trail AND Clawback/Freeze Policy §15.
 - **Phase 5 OPS-07 obligation:** Add mint `9JqkhuAU5P7Kyg3WxaTcuYT85AahyvXHr1duxakXpump` to the copycat watchlist with a documented anti-phishing response procedure. Now a published policy commitment (Clawback/Freeze Policy §15), not just an internal note.
 - **Phase 5 Freeze Transparency Log bootstrap obligation:** On the same day the Clawback/Freeze Policy takes effect on caycsolana.com, publish `docs/security/freeze-transparency-log.md` with Entry 0 (policy effective date marker). Schema specified in Clawback/Freeze Policy §8 — Phase 5 Ops Runbook must not improvise.
@@ -109,6 +116,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-19T21:57:39Z
-Stopped at: Completed 01-04-PLAN.md (Style Guide v1.0 + language audit CI wired end-to-end; POL-04 closed). Phase 1 COMPLETE — all 4 of 4 POL requirements shipped. Phase 2 (Squads Multisig Setup, GOV-01..04) is next.
+Last session: 2026-04-20T04:25:27.770Z
+Stopped at: Completed 02-01-PLAN.md (src/squads helper module + src/env/load.ts + scripts/squads generator+verifier; 8 vitest tests passing; gitleaks PATH gate closed session-wide). Plan 02-02 (devnet multisig creation via SDK) is next — imports from src/squads are ready.
 Resume file: None
