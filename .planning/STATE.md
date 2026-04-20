@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 02-02-PLAN.md (devnet Squads v4 multisig live on-chain; artifacts/devnet.json authoritative; .env.devnet populated; GOV-01 closed). Plan 02-03 (rotation drill + smoke-test mint) is next — refund signer wallets before running since faucet daily limit hit during 02-02.
-last_updated: "2026-04-20T04:45:48.948Z"
-last_activity: 2026-04-20 — Plan 02-02 complete (d951edf); GOV-01 CLOSED. Plan 02-03 (rotation drill + smoke-test mint) is next — imports from src/squads + reads artifacts/devnet.json.
+status: completed
+stopped_at: Completed 02-03-PLAN.md (rotation drill + smoke-test mint done; src/squads/proposals.ts lifecycle helpers; docs/runbooks/authority-rotation.md; Pitfall 11 negative test captured). Plan 02-04 (mainnet preflight) is next.
+last_updated: "2026-04-20T05:10:17.873Z"
+last_activity: 2026-04-20 — Plan 02-03 complete (aa6d41c); GOV-04 devnet arm CLOSED. Plan 02-04 (mainnet preflight) is next — first plan that requires HELIUS_MAINNET_RPC_URL.
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 10
-  completed_plans: 6
-  percent: 60
+  completed_plans: 7
+  percent: 70
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-04-19)
 ## Current Position
 
 Phase: 2 of 7 (Squads Multisig Setup — Devnet + Mainnet) — IN PROGRESS
-Plan: 2 of 6 in current phase COMPLETE (02-02 devnet Squads v4 multisig live on-chain; next: 02-03 rotation drill + smoke-test mint)
-Status: Plan 02-02 complete. Devnet multisig 6Pu2arj3tnaVG7wRE1WB8qFdTssqwertg4svKnoBMEVu live on-chain (Squads v4 program SQDS4ep65T869zMMBKyuUq6aD6EgTu8psMjkvj52pCf); vault PDA 5tTobJ2HLuuKZxXGLYZW1Wo2ojVhD1wZfoFDxDUkKtHu (distinct — Pitfall 11 verified); threshold 3 of 6 (5 voting + 1 proposer-only); self-managed configAuthority; timeLock=0. scripts/squads/create-devnet.ts + artifacts/devnet.json committed; .env.devnet populated (gitignored). proposer keypair funded (1.9 SOL via transfer from id-devnet.json — daily faucet limit hit); 5 signer keypairs unfunded (0 SOL — OK for this plan, refund in 02-03).
-Last activity: 2026-04-20 — Plan 02-02 complete (d951edf); GOV-01 CLOSED. Plan 02-03 (rotation drill + smoke-test mint) is next — imports from src/squads + reads artifacts/devnet.json.
+Plan: 3 of 6 in current phase COMPLETE (02-03 rotation drill + smoke-test mint done; next: 02-04 mainnet preflight)
+Status: Plan 02-03 complete. Devnet rotation drill (AddMember + RemoveMember, net-zero) + smoke-test mint (Token-2022 mint authority=vault PDA, multisig-signed mintTo of 1M raw units, Pitfall 11 negative test captured "Error: owner does not match") both executed end-to-end on devnet. src/squads/proposals.ts lifecycle helpers (proposeVaultTransaction, approveProposal, executeVaultTransaction, proposeConfigTransaction, executeConfigTransaction) with inter-RPC confirmation baked in — reusable by Phase 4 mainnet mint creation. docs/runbooks/authority-rotation.md (301 lines) published. GOV-04 DEVNET ARM closed; MAINNET ARM still deferred to Phase 4 DEP-04 (requires production mint to exist). Phase 2 Success Criteria 1 (rotation drill) + 4 (devnet byte-level mint proof) satisfied.
+Last activity: 2026-04-20 — Plan 02-03 complete (aa6d41c); GOV-04 devnet arm CLOSED. Plan 02-04 (mainnet preflight) is next — first plan that requires HELIUS_MAINNET_RPC_URL.
 
-Progress: [██████░░░░] 60%
+Progress: [███████░░░] 70%
 
 ## Performance Metrics
 
@@ -56,6 +56,7 @@ Progress: [██████░░░░] 60%
 | Phase 01-foundation P01 | 18min | 2 tasks | 1 file |
 | Phase 02-squads-multisig-setup-devnet-mainnet P01 | 7min | 2 tasks | 11 files |
 | Phase 02-squads-multisig-setup-devnet-mainnet P02 | 10min | 2 tasks | 2 files |
+| Phase 02-squads-multisig-setup-devnet-mainnet P03 | 14min | 3 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -100,6 +101,9 @@ Decisions are logged in PROJECT.md Key Decisions table. Locked constraints drivi
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] artifacts/devnet.json shape: { network, generated_at, squads: {...}, notes: [...] } with network-agnostic top-level and 'squads' sub-object. Phase 3+ plans append sibling keys (mint: {...}, treasury: {...}) via {...prior, ...artifact} merge-on-write; squads is never mutated. Same shape template applies to artifacts/mainnet.json in Plan 02-05.
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Devnet multisig 6Pu2arj3tnaVG7wRE1WB8qFdTssqwertg4svKnoBMEVu + vault PDA 5tTobJ2HLuuKZxXGLYZW1Wo2ojVhD1wZfoFDxDUkKtHu is the canonical Phase 2+3 devnet authority. Pitfall 11: multisig != vault; all Phase 3+ authorities (mint/freeze/update/permanent-delegate) MUST point to vault_pda, NEVER multisig_address. One orphaned first-attempt multisig at H1QWPbfzZn57Z3G6G96N6n1Z2XuLBtP5u75b5ZzJn2dy is accepted cruft (~0.003 SOL devnet rent, no operational impact).
 - [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] scripts/squads/* driver template: loadEnv(network) → buildConnection(network) → Keypair loads from gitignored keys/ → SDK call → retry-on-read → artifact+env merge-write. Idempotence via existsSync(artifactPath) + populated-key check + --force override. Applies to 02-03 rotation, 02-05 mainnet ceremony, and Phase 4 mint creation scripts.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Inter-RPC confirmation wait baked into src/squads/proposals.ts: @sqds/multisig RPC helpers use sendTransaction without awaiting confirmation, causing AnchorError 6009 InvalidTransactionIndex when chaining configTransactionCreate → proposalCreate back-to-back. Fix: every lifecycle helper now calls connection.confirmTransaction(sig, 'confirmed') before returning. Phase 4 mainnet mint creation inherits this fix for free.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] rentPayer: proposer is REQUIRED for AddMember configTransactionExecute — voting signers hold ~0.02 SOL (tx fees only) and cannot cover the ~0.002 SOL rent grow. Default rentPayer=executor is only safe for RemoveMember / ChangeThreshold (shrink or no-op). Documented in docs/runbooks/authority-rotation.md.
+- [Phase 02-squads-multisig-setup-devnet-mainnet]: [Phase 02] Pitfall 11 devnet existence proof: throwaway Token-2022 mint J516PvBznTVHT9xDtWs2Qc6rBk3y9DqaK5JdCSUh2RbJ with mint+freeze authorities=vault PDA; multisig-signed mintTo of 1_000_000 raw units to recipient ATA succeeded. Negative test captured byte-level failure signature {"InstructionError":[0,{"Custom":4}]} + 'Error: owner does not match' as the prod-monitoring-recognizable failure if Pitfall 11 is ever bypassed. artifacts/devnet.json.devnet_smoke_test.pitfall_11_negative_test_captured: true. GOV-04 devnet arm closed; mainnet arm deferred to Phase 4 DEP-04.
 
 ### Pending Todos
 
@@ -122,6 +126,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-20T04:45:48.944Z
-Stopped at: Completed 02-02-PLAN.md (devnet Squads v4 multisig live on-chain; artifacts/devnet.json authoritative; .env.devnet populated; GOV-01 closed). Plan 02-03 (rotation drill + smoke-test mint) is next — refund signer wallets before running since faucet daily limit hit during 02-02.
+Last session: 2026-04-20T05:09:52.806Z
+Stopped at: Completed 02-03-PLAN.md (rotation drill + smoke-test mint done; src/squads/proposals.ts lifecycle helpers; docs/runbooks/authority-rotation.md; Pitfall 11 negative test captured). Plan 02-04 (mainnet preflight) is next.
 Resume file: None
