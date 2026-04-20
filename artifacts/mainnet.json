@@ -1,0 +1,39 @@
+{
+  "network": "mainnet-beta",
+  "generated_at": "2026-04-20T15:20:16.898Z",
+  "commit_sha": "083aa85c5a9bd5f6b510fd38983a6d5696ef41c0",
+  "squads": {
+    "program_id": "SQDS4ep65T869zMMBKyuUq6aD6EgTu8psMjkvj52pCf",
+    "program_version": "v4",
+    "multisig_address": "46rXDgUogTwwUVwohfcayqWNQzHj157GQvKTogfVinWR",
+    "vault_pda": "CFYA2y6nwmyqUxDFX7WvFKgYFtMWHLxdK8rZkGtD2BJR",
+    "create_key_pubkey": "HieVU7yhWgRGUPu5T5LyZj9tGWLUzC5WoxMbBCLxojex",
+    "threshold": 3,
+    "voting_member_count": 5,
+    "voting_members": [
+      "DwK4842jNasCGigQ1BruQxRFKpXevnBmPwuKLJVXBMuu",
+      "G28iLXukQFExfZ21Gaq5M7CdqBFPmvkwwfRotxvU7ESq",
+      "5BnDpWnRh8aZ3oFVBn54Z8mF2agnCcNJyTKS179fYU3b",
+      "HBEqzqWmzvhQq3jAKBAdsE2DzoiGoKEy5A22d7jTMNPt",
+      "KzCZnpmePppaQf9D9jcWnKPoiDTdznK7g4qKt73zD3n"
+    ],
+    "proposer_only_pubkey": "2gUjoCGqqoxQ9ivrTqGhHmtLqvFp3gvDRYCrMAwtkxA1",
+    "time_lock_slots": 0,
+    "config_authority": null,
+    "rent_collector": null,
+    "creation_tx_signature": "Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs",
+    "creation_slot": 414500481,
+    "explorer_url": "https://explorer.solana.com/tx/Dtx1x2kcwicMfo4LVqSjkzBWpjTa4cv7ALj82FMQZTwMFSBuQxmuw9CTDiYpHCkFFCqKUp7eaEYVQFKJzMX5XJs",
+    "preflight_artifact_snapshot": {
+      "generated_at": "2026-04-20T14:58:25.847Z",
+      "overall": "pass",
+      "pass_count": 12,
+      "check_count": 12
+    },
+    "human_confirmation_timestamp": "2026-04-20T15:20:14.732Z"
+  },
+  "notes": [
+    "PITFALLS.md Pitfall 11: Authorities MUST be vault_pda, NOT multisig_address. Phase 4 mint ceremony uses vault_pda for mint/freeze/update authority AND Permanent Delegate.",
+    "This file is APPEND-ONLY from this commit onward. Only ceremony scripts that reach a successful on-chain execution may modify it, and only to add new top-level keys (mint, treasury_ata, etc.) - the squads subobject is frozen."
+  ]
+}
