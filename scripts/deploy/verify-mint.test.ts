@@ -19,6 +19,10 @@ import { ExtensionType } from '@solana/spl-token';
 // Module-level mocks: intercept on-chain reads so tests run in-process, <1s.
 // vi.mock is hoisted to the top of the file by vitest.
 // -----------------------------------------------------------------------------
+// Note: getTokenMetadata lives in @solana/spl-token (re-exported from the
+// tokenMetadata extension), NOT in @solana/spl-token-metadata. The low-level
+// @solana/spl-token-metadata package only exposes codecs + instruction
+// builders, not account readers. One mock module covers all read helpers.
 vi.mock('@solana/spl-token', async () => {
   const actual = await vi.importActual<typeof import('@solana/spl-token')>('@solana/spl-token');
   return {
@@ -27,11 +31,9 @@ vi.mock('@solana/spl-token', async () => {
     getExtensionTypes: vi.fn(),
     getPermanentDelegate: vi.fn(),
     getMetadataPointerState: vi.fn(),
+    getTokenMetadata: vi.fn(),
   };
 });
-vi.mock('@solana/spl-token-metadata', () => ({
-  getTokenMetadata: vi.fn(),
-}));
 
 // Import AFTER vi.mock so mocked exports are in the module graph.
 import {
@@ -39,8 +41,8 @@ import {
   getExtensionTypes,
   getPermanentDelegate,
   getMetadataPointerState,
+  getTokenMetadata,
 } from '@solana/spl-token';
-import { getTokenMetadata } from '@solana/spl-token-metadata';
 
 // System under test — intentionally the module path 03-02 Task 2 will create.
 // In RED phase the import resolves to a non-existent module and the tests fail.
@@ -161,9 +163,7 @@ describe('scripts/deploy/verify-mint — runVerify contract', () => {
   // Test 3 — wrong mint authority → mismatch names expected vault + actual key
   // ---------------------------------------------------------------------------
   it('wrong mintAuthority produces a mismatch error naming both addresses', async () => {
-    mockedGetMint.mockResolvedValue(
-      buildMockMint({ mintAuthority: UNRELATED }) as never,
-    );
+    mockedGetMint.mockResolvedValue(buildMockMint({ mintAuthority: UNRELATED }) as never);
     const result = await runVerify({
       connection: fakeConnection,
       mint: MINT,
@@ -172,9 +172,7 @@ describe('scripts/deploy/verify-mint — runVerify contract', () => {
     });
     expect(result.ok).toBe(false);
     expect(result.errors).toEqual(
-      expect.arrayContaining([
-        expect.stringContaining('mintAuthority'),
-      ]),
+      expect.arrayContaining([expect.stringContaining('mintAuthority')]),
     );
     const mintAuthError = result.errors.find((e) => e.includes('mintAuthority'));
     expect(mintAuthError).toBeDefined();
@@ -214,9 +212,7 @@ describe('scripts/deploy/verify-mint — runVerify contract', () => {
     });
     expect(result.ok).toBe(false);
     expect(result.errors).toEqual(
-      expect.arrayContaining([
-        expect.stringContaining(`name: expected ${EXPECTED_NAME_REH2}`),
-      ]),
+      expect.arrayContaining([expect.stringContaining(`name: expected ${EXPECTED_NAME_REH2}`)]),
     );
     const nameErr = result.errors.find((e) => e.startsWith('name:'));
     expect(nameErr).toBeDefined();
