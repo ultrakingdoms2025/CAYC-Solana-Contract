@@ -47,6 +47,30 @@ Two-tier approach for durability + speed:
 
 Plans may revisit this if Arweave upload proves difficult — acceptable fallbacks: IPFS via Pinata (paid pinning), or user's own website with cache-control headers.
 
+### Concrete Assets Available On-Disk
+
+These are confirmed present at the time of context capture:
+
+- **Logo file:** `assets/logo.png` — 5863×4529 PNG, RGBA, 394 KB. **WILL be resized** during planning/execution to 512×512 (primary display) + 1024×1024 (high-res), both losslessly-compressed via `pnpm dlx oxipng` or equivalent. The 5863×4529 original should be retained as `assets/logo-source.png` (source-of-truth); the 512 + 1024 derivatives are what get uploaded to Arweave / referenced in metadata JSON. Wallets typically cap at ~200 KB per logo; the compressed 512×512 should fit comfortably under this.
+- **Website URL:** `https://cayc.io` — resolves (Cloudflare 308 → `https://www.cayc.io/` on Vercel, HTTP 200). Use the short form `https://cayc.io` in off-chain metadata JSON; the 308 redirect is permanent and CDN-handled so wallet clients will follow it correctly.
+
+### Off-chain Metadata JSON (shape planners should target)
+
+The on-chain `uri` field points here. Target shape per Token-2022 conventions + SPL metadata standard:
+
+```json
+{
+  "name": "Cyber Ape Yacht Club 8G",
+  "symbol": "CAYC",
+  "description": "Payment token for Cyber Ape Yacht Club. Squads 3-of-5 multisig.",
+  "image": "https://arweave.net/<TX_ID>",
+  "external_url": "https://cayc.io",
+  "attributes": []
+}
+```
+
+`image` points to the 512×512 PNG on Arweave; GitHub raw URL may appear as a comment / fallback depending on how the JSON-hosting plan shakes out.
+
 ### Rehearsal Strategy (Claude's Discretion — default)
 
 - **Two fresh devnet mints** — do NOT reuse the Plan 02-03 smoke-test mint (that's a separate proof artifact and should remain intact)
