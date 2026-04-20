@@ -17,6 +17,8 @@
     "gitleaks:staged": "gitleaks protect --staged --config .gitleaks.toml --redact --verbose",
     "lang:audit": "bash scripts/check-language.sh",
     "lang:audit:staged": "bash scripts/check-language.sh --staged",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepare": "husky"
   },
   "dependencies": {
